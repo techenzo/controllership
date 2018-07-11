@@ -24,9 +24,9 @@ class PagesController extends Controller
 
     public function purchasing(){
         $title ='Controllership Contract Repository';
-        $vendors = Vendor::where('status', '1')->get();
+        $vendors = Vendor::where('status', '1')->paginate(10);
         
-        // return view('pages.purchasing')->with('title', $title);
+    
         return view('pages.purchasing', compact('title', 'vendors'));
     }
 
@@ -43,10 +43,10 @@ class PagesController extends Controller
 
         
 
-        $termination = Terms::where('terms_id', '1')->get();
-        $payment = Terms::where('terms_id', '2')->get();
-        $spend = Terms::where('terms_id', '3')->get();
-        $penalty = Terms::where('terms_id', '4')->get();
+        $termination = Terms::where('id', '1')->get();
+        $payment = Terms::where('id', '2')->get();
+        $spend = Terms::where('id', '3')->get();
+        $penalty = Terms::where('id', '4')->get();
         
 
         

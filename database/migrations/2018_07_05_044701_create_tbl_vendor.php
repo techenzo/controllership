@@ -28,6 +28,11 @@ class CreateTblVendor extends Migration
             $table->date('expirationdate');
             $table->integer('status');
             $table->string('cover_image');
+
+            $table->longText('termination');
+            $table->longText('payment');
+            $table->longText('spend');
+            $table->longText('penalty');
             $table->timestamps();
         });
     }

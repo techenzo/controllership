@@ -31,6 +31,7 @@ Route::get('/', 'PagesController@index');
 // Route::get('/finance', 'PagesController@finance');
 Route::get('/purchasing', 'PagesController@purchasing');
 Route::get('/purchasing/create', 'VendorsController@addvendor');
+Route::get('/purchasing/search', 'VendorsController@searchvendor');
 
 Route::resource('vendor', 'VendorsController');
 Auth::routes();

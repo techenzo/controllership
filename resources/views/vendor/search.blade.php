@@ -4,90 +4,67 @@
 
     <h1 class="display-4">Controllership Contract Repository</h1>
     <div class="container">
- 
-        {{-- <div class="row">
-            <div class="col-md-12">
-                <form action="{{action('VendorsController@searchvendor')}}" method="get">
-                <div class="input-group" id="adv-search">
-                <input type="text" class="form-control" name ="s" placeholder="Search Vendors" value="{{isset($s) ? $s : ''}}"/>
-                    <div class="input-group-btn">
-                        <div class="col btn-group" role="group">
-                            <div class="dropdown dropdown-lg">
-                      
-                            <btton type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>&emsp;
-                            </form>
-                           
-                            </div> 
-                        </div> 
-                    </div>
+        {{-- search bar --}}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <form action="" class="search-form">
+                        <div class=""{{action('VendorsController@searchvendor')}}" method="get" col-md-8 form-group has-feedback">
+                            <label for="search" class="sr-only">Search</label>
+                            <input type="text" class="form-control" name="s" id="s" placeholder="Search Vendor" value="{{isset($s) ? $s : ''}}">
+                            <span class="glyphicon glyphicon-search form-control-feedback"></span>       
+                        </div>
+                        <div class="col-md-2">
+                            <a href="purchasing/create" >
+                                <button class="btn btn-add btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
+                            </a>
+                        </div>
+                    </form>
                 </div>
-                
-            </div>        
-        </div> --}}
-        <div align="right">
-            <a href="purchasing/create" >
-            <button class="btn btn-add btn-primary"><span class="glyphicon glyphicon-plus"> Add Vendor</span></button>
-            </a>   
+            </div>
         </div>
-        
         {{-- data table --}}
         <div class="row">
             <div class="col">
-                <h4>Vendors Details</h4>
+                <h4>Vendor</h4>
                 <div class="table-responsive">    
                     <table id="mytable" class="table table-bordred table-striped"> 
                         <thead>  
                             {{-- <th><input type="checkbox" id="checkall" /></th> --}}
-                            <th>ID</th>
+                            {{-- <th>ID</th>
                             <th>Vedor Name</th>
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Address</th>
                             <th>Email</th>
                             <th>Web Url</th>
-                            {{-- <th>Contract Type</th>
+                            <th>Contract Type</th>
                             <th>Category Type</th>
-                            <th>Department</th> --}}
+                            <th>Department</th>
                             <th>Effective Date</th>
-                            <th>Expiration Date</th>
+                            <th>Expiration Date</th> --}}
 
-                            <th>Edit</th>
+                            {{-- <th>Edit</th> --}}
                             {{-- <th>Delete</th> --}}
                         </thead>
                         <tbody>
-                        @foreach ($vendors as $value)
-                        <tr>  
-
-                            {{-- this will display only the concatination of contract code and the vendor id --}}
-                            <td>   
-                            {{$value->code}}
-                            <?php
-                            $num = $value->vendor_id;
-                            $num_padded = sprintf("%06d", $num);
-                            echo $num_padded;
-                            ?>
-                            </td>
+                        {{-- @foreach ($vendors as $value) --}}
+                        <tr>     
+                            {{-- <td><input type="checkbox" class="checkthis" /></td> --}}
+                            {{-- <td>{{$value->vendor_id}}</td>
                             <td>{{ $value->vendor}}</td>
                             <td>{{ $value->firstname}}</td>
                             <td>{{ $value->lastname}}</td>
                             <td>{{ $value->address}}</td>
                             <td>{{ $value->email}}</td>
                             <td>{{ $value->weburl}}</td>
-                            {{-- <td>{{ $value->contract}}</td>
+                            <td>{{ $value->contract}}</td>
                             <td>{{ $value->category}}</td>
-                            <td>{{ $value->department}}</td> --}}
+                            <td>{{ $value->department}}</td>
                             <td>{{ $value->effectivedate}}</td>
-                            <td>{{ $value->expirationdate}}</td>
+                            <td>{{ $value->expirationdate}}</td> --}}
 
-                            <td>
-                                <a href="vendor/{{$value->vendor_id}}">
-                                <p data-placement="top" data-toggle="tooltip" title="Edit">
-                                    <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="" >
-                                        <span class="glyphicon glyphicon-pencil"></span>
-                                    </button>
-                                </p>
-                                </a>
-                            </td>
+                            {{-- <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td> --}}
                             {{-- <td>
                                 <a href="{{action('VendorsController@destroy', $vendor['vendor_id'])}}">
                                     <p data-placement="top" data-toggle="tooltip" title="Delete">
@@ -96,12 +73,12 @@
                                 </a>
                             </td> --}}
                         </tr>
-                        @endforeach 
+                        {{-- @endforeach  --}}
                         </tbody>
                     </table>
-                    
-                    {{-- {{$categories->appends(['s'=>$s])->links()}} --}}
-                    <div class="clearfix" ></div>
+
+                    {{$categories->appends(['s'=>$s])->links()}}
+                    <div class="clearfix"></div>
                         {{-- Pagination --}}
                         {{-- <ul class="pagination pull-right">
                             <li class="disabled"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
@@ -112,7 +89,6 @@
                             <li><a href="#">5</a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
                         </ul>   --}}
-                        {{ $vendors->links() }}
                     </div>
                 </div>
             </div>

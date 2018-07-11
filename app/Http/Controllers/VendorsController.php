@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Storage;
 use App\User;
 use App\Vendor;
 use App\Terms;
+use App\Contract;
+
 use DB;
 
 class VendorsController extends Controller
@@ -23,6 +25,16 @@ class VendorsController extends Controller
         return $vendor;
       
     }
+
+    public function searchvendor(Request $request){
+        $s = $request->input('s');
+            $categories = Vendor::latest()
+            ->search($s)
+            ->paginate(20);
+  
+    return view('vendor.search', compact('categories', 's'));
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -53,10 +65,23 @@ class VendorsController extends Controller
             'weburl' => 'required',
             'contract' =>'required',
             'category' =>'required',
+         
+    
+            'termination' =>'required',
+            'payment' =>'required',
+            'spend' =>'required',
+            'penalty' =>'required',
+
             'effectdate' =>'required',
             'expiredate' =>'required'
 
+            
+
         ]);
+
+
+
+       
         
         // Create New Vendor
         $vendorName = $request->input('vendor_name');
@@ -67,12 +92,25 @@ class VendorsController extends Controller
         $web = $request->input('weburl');
 
         $con = $request->input('contract');
+
+
         $cat = $request->input('category');
-        $dep = $request->input('department');
+        // $dep = $request->input('department');
+
+        $t= $request->input('termination');
+        $p = $request->input('payment');
+        $s = $request->input('spend');
+        $p2 = $request->input('penalty');
+
+
         $eff = $request->input('effectdate');
         $exp= $request->input('expiredate');
       
+        //Search code
 
+        $code = Contract::select('code')->where('value', $con)->first();
+      
+        
 
         $vendor = new Vendor;
         $vendor->vendor = $vendorName;
@@ -83,9 +121,17 @@ class VendorsController extends Controller
         $vendor->weburl = $web;
         $vendor->contract = $con;
         $vendor->category = $cat;
-        $vendor->department = $dep;
+        $vendor->department = $request->input('department');
+
+
+        $vendor->termination = $t;
+        $vendor->payment = $p;
+        $vendor->spend = $s;
+        $vendor->penalty = $p2;
+
         $vendor->effectivedate = $eff;
         $vendor->expirationdate = $exp;
+        $vendor->code = $code->code;
         $vendor->status = '1';
         $vendor->save();
 
@@ -103,7 +149,7 @@ class VendorsController extends Controller
         // baguhin mo to mamaya.
         $vendor = Vendor::whereVendorId($id)->first();
 
-        return view('vendor.purchasing2', compact('vendor'));
+        return view('vendor.edit', compact('vendor'));
     }
 
     /**
@@ -131,22 +177,27 @@ class VendorsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return $request->all();
+        // return $request->all();
+        //Validation
+        $this->validate($request, [
+            'vendor_name' => 'required',
+            'first_name' => 'required',  
+            'last_name' => 'required',
+            'address' => 'required',
+            'email' => 'required',
+            'weburl' => 'required',
 
-        // Validation
-        // $this->validate($request, [
-        //     'vendor_name' => 'required',
-        //     'first_name' => 'required',  
-        //     'last_name' => 'required',
-        //     'address' => 'required',
-        //     'email' => 'required',
-        //     'weburl' => 'required',
-        //     'contract' =>'required',
-        //     'category' =>'required',
-        //     'effectdate' =>'required',
-        //     'expiredate' =>'required'
+            'termination' =>'required',
+            'payment' =>'required',
+            'spend' =>'required',
+            'penalty' =>'required',
 
-        // ]);
+            'effectdate' =>'required',
+            'expiredate' =>'required'
+
+            
+
+        ]);
         
         // Update Vendor
         $vendorName = $request->input('vendor_name');
@@ -156,31 +207,44 @@ class VendorsController extends Controller
         $mail= $request->input('email');
         $web = $request->input('weburl');
 
-        // $con = $request->input('contract');
-        // $cat = $request->input('category');
-        // $dep = $request->input('department');
-        // $eff = $request->input('effectdate');
-        // $exp= $request->input('expiredate');
-      
+        $t= $request->input('termination');
+        $p = $request->input('payment');
+        $s = $request->input('spend');
+        $p2 = $request->input('penalty');
 
 
+        $eff = $request->input('effectdate');
+        $exp= $request->input('expiredate');
       
-        // $vendor = Vendor::find($id);
+        //Get code
+        $code = Contract::select('code')->where('value', $con)->first();
+ 
+        
+
+        $vendor = Vendor::find($id);
         $vendor->vendor = $vendorName;
         $vendor->firstname = $fName;
         $vendor->lastname = $lName;
         $vendor->address = $add;
         $vendor->email = $mail;
         $vendor->weburl = $web;
-        // $vendor->contract = $con;
-        // $vendor->category = $cat;
-        // $vendor->department = $dep;
-        // $vendor->effectivedate = $eff;
-        // $vendor->expirationdate = $exp;
+        $vendor->contract = $request->input('contract');
+        $vendor->category = $request->input('category');
+        $vendor->department = $request->input('department');
 
+
+        $vendor->termination = $t;
+        $vendor->payment = $p;
+        $vendor->spend = $s;
+        $vendor->penalty = $p2;
+
+        $vendor->effectivedate = $eff;
+        $vendor->expirationdate = $exp;
+        $vendor->code = $code->code;
+        $vendor->status = '1';
         $vendor->save();
 
-        return redirect('/purchasing')->with('success', 'Vendor Updated');
+        return view('/purchasing')->with('success', 'Vendor Updated');
     }
 
     /**
@@ -214,10 +278,10 @@ class VendorsController extends Controller
 
         
 
-        $termination = Terms::where('terms_id', '1')->get();
-        $payment = Terms::where('terms_id', '2')->get();
-        $spend = Terms::where('terms_id', '3')->get();
-        $penalty = Terms::where('terms_id', '4')->get();
+        $termination = Terms::where('id', '1')->get();
+        $payment = Terms::where('id', '2')->get();
+        $spend = Terms::where('id', '3')->get();
+        $penalty = Terms::where('id', '4')->get();
         
 
         
@@ -227,6 +291,7 @@ class VendorsController extends Controller
         
     }
 
+   
 
    
 }

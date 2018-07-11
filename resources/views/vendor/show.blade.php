@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h1 class="display-4">Controllership Contract Repository</h1>
+    <h1 class="display-4">Controllership Contract Repositorydddd</h1>
     <div class="container">
         {{-- search bar --}}
         <div class="row">
