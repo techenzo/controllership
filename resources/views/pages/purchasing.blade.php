@@ -24,11 +24,11 @@
                 
             </div>        
         </div> --}}
-        <div align="right">
+        {{-- <div align="right">
             <a href="purchasing/create" >
             <button class="btn btn-add btn-primary"><span class="glyphicon glyphicon-plus"> Add Vendor</span></button>
             </a>   
-        </div>
+        </div> --}}
         
         {{-- data table --}}
         <div class="row">
@@ -50,8 +50,9 @@
                             <th>Department</th> --}}
                             <th>Effective Date</th>
                             <th>Expiration Date</th>
-
-                            <th>Edit</th>
+                            <th>Created by</th>
+                            <th>Files</th>
+                            {{-- <th>Edit</th> --}}
                             {{-- <th>Delete</th> --}}
                         </thead>
                         <tbody>
@@ -78,8 +79,10 @@
                             <td>{{ $value->department}}</td> --}}
                             <td>{{ $value->effectivedate}}</td>
                             <td>{{ $value->expirationdate}}</td>
+                            <td>{{ $value->user['name']}}</td>
+                            <td><a href="vendor/{{$value->vendor_id}}/files">View</a></td>
 
-                            <td>
+                            {{-- <td>
                                 <a href="vendor/{{$value->vendor_id}}">
                                 <p data-placement="top" data-toggle="tooltip" title="Edit">
                                     <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="" >
@@ -87,7 +90,7 @@
                                     </button>
                                 </p>
                                 </a>
-                            </td>
+                            </td> --}}
                             {{-- <td>
                                 <a href="{{action('VendorsController@destroy', $vendor['vendor_id'])}}">
                                     <p data-placement="top" data-toggle="tooltip" title="Delete">
@@ -117,6 +120,7 @@
                 </div>
             </div>
         </div>
+
         {{-- modal area for edit --}}
         <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
             <div class="modal-dialog">

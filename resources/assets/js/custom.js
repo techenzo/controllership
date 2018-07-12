@@ -63,6 +63,9 @@
 
 
 $(document).ready(function () {
+
+    console.log('welcome');
+ 
     $("#department").prop("disabled", true);
     $("#category").click(function() {   
         console.log($("#category option:selected" ).text());
@@ -78,6 +81,10 @@ $(document).ready(function () {
             console.log('others');
         }
       });
+
+
+
+      
 });
 
 function changeSelection(){
@@ -105,4 +112,14 @@ $("#expiredate").click(function(){
     });
     $('#expiredate').datepicker('show');
 });
+
+
+
+$(".uploadfile").click(function(){
+    var inputOne = $("#vendor_name");
+    var inputTwo = $(".name");
+    inputTwo.val(inputOne.val());
+});
+
+
 

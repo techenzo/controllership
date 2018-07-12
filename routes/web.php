@@ -33,6 +33,10 @@ Route::get('/purchasing', 'PagesController@purchasing');
 Route::get('/purchasing/create', 'VendorsController@addvendor');
 Route::get('/purchasing/search', 'VendorsController@searchvendor');
 
+Route::get('/multiuploads', 'VendorsController@uploadForm');
+
+Route::post('/multiuploads', 'VendorsController@uploadSubmit');
+
 Route::resource('vendor', 'VendorsController');
 Auth::routes();
 

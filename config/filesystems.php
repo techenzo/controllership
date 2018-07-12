@@ -1,6 +1,10 @@
 <?php
 
+
+
 return [
+    
+
 
     /*
     |--------------------------------------------------------------------------
@@ -40,7 +44,7 @@ return [
     | Supported Drivers: "local", "ftp", "s3", "rackspace"
     |
     */
-
+    'default'=>'local',
     'disks' => [
 
         'local' => [
@@ -65,4 +69,8 @@ return [
 
     ],
 
+    
+
 ];
+
+

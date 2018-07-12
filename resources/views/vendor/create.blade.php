@@ -140,21 +140,22 @@
                                         <span class="button-checkbox">
                                                 {{-- <button type="button" class="btn" data-color="info" tabindex="7">I Agree</button>      --}}
                                                 <!-- Button trigger modal -->
-                                                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenter" tabindex="16">Upload Files</button>
+                                                <button type="button" class="btn btn-secondary uploadfile" data-toggle="modal" data-target="#exampleModalCenter" tabindex="16">Upload Files</button>
                   
                                                 <!-- Modal -->
                                                 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                                         <div class="modal-content">
                                                         <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLongTitle">Select files from your computer</h5>
+                                                        <h5 class="modal-title" name="" id="exampleModalLongTitle">Select files from your computer.</h5>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                         </button>
                                                         </div>
-                                                        <div class="modal-body">
+                                                        <div class="modal-body form-group">
                                                                 {{-- UPLOAD FILE --}}
-                                                              
+                                                                
+                                                               
                                                                 <div class="form-group">
                                                                    
                                                                         {{-- <div class="col-sm-9">
@@ -165,13 +166,26 @@
                                                                         <br> --}}
 
                                                                         <!-- Standar Form -->
-                                                                        {{-- <h4>Select files from your computer</h4> --}}
-                                                                        <form action="" method="post" enctype="multipart/form-data" id="js-upload-form">
+                                                                        
+                                                                        <form action="/multiuploads" method="post" enctype="multipart/form-data" id="js-upload-form">
+                                                                                {{ csrf_field() }}
                                                                         <div class="form-inline">
                                                                         <center>
+                                                                               
+                                                                    
                                                                         <div class="form-group">
+                                                                                {{--Vendor name save files--}}                                                   
+                                                                                <input type="text" name="name" class="name" readonly>                                                                                                                                                                       
+                                                                         </div>
+                                                                        <br>
+                                                                        <br>
+                                                                                          
+
+                                                                        <div class="form-group">
+                                                                                
                                                                                 <span class="btn btn-default btn-file">
-                                                                                <input type="file" name="files[]" id="js-upload-files" multiple>
+                                                                                        
+                                                                                <input type="file" name="photos[]" id="js-upload-files" multiple>
                                                                                 </span>
                                                                                 &nbsp;
                                                                         </div>
@@ -181,26 +195,26 @@
                                                                         </form>
 
                                                                         <!-- Drop Zone -->
-                                                                        <h4 class="text-center">Or drag and drop files below</h4>
+                                                                        {{-- <h4 class="text-center">Or drag and drop files below</h4>
                                                                         <div class="upload-drop-zone" id="drop-zone">
                                                                         Just drag and drop files here
-                                                                        </div>
+                                                                        </div> --}}
 
                                                                         <!-- Progress Bar -->
-                                                                        <div class="progress">
+                                                                        {{-- <div class="progress">
                                                                         <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
                                                                         <span class="sr-only">60% Complete</span>
                                                                         </div>
-                                                                        </div>
+                                                                        </div> --}}
 
                                                                         <!-- Upload Finished -->
-                                                                        <div class="js-upload-finished">
+                                                                        {{-- <div class="js-upload-finished">
                                                                         <h3>Processed files</h3>
                                                                         <div class="list-group">
                                                                         <a href="#" class="list-group-item list-group-item-success"><span class="badge alert-success pull-right">Success</span>image-01.jpg</a>
                                                                         <a href="#" class="list-group-item list-group-item-success"><span class="badge alert-success pull-right">Success</span>image-02.jpg</a>
                                                                         </div>
-                                                                        </div>
+                                                                        </div> --}}
                                                                         </center>
                                                                 </div>
                                                                 
@@ -223,7 +237,7 @@
                         <hr class="colorgraph">
                         
                         <div class="row">
-                                <div class="col-xs-12 col-md-6"><a href="/purchasing" class="btn btn-danger btn-block btn-lg" tabindex="19">Cancel</a></div>
+                                <div class="col-xs-12 col-md-6"><a href="/home" class="btn btn-danger btn-block btn-lg" tabindex="19">Cancel</a></div>
                                 <div class="col-xs-12 col-md-6"><input type="submit" value="Register" class="btn btn-primary btn-block btn-lg" tabindex="20"></div>
                         </div>
                         <br>

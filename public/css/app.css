@@ -8355,3 +8355,8 @@ button.close {
   color: white;
 }
 
+.name {
+  background: rgba(0, 0, 0, 0) !important;
+  border: none;
+}
+
