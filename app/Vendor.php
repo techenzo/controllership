@@ -25,6 +25,9 @@ class Vendor extends Model
         return $query->Where ('firstname', 'like', '%' .$s. '%')
             ->orWhere('vendor', 'like', '%' .$s. '%');
     }
+
+    //for export files
+    public $fillable = ['vendor','firstname'];
 }
 
 

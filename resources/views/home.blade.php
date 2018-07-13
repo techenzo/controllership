@@ -64,6 +64,8 @@
                                         <button class="btn btn-add btn-primary"><span class="glyphicon glyphicon-plus"> New Vendor</span></button>
                                         </a>   
                                 </div>
+
+                               
                                 @else
                                 <h1>You have no vendor post.</h1>                                        
                                 @endif

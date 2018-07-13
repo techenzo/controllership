@@ -11,9 +11,9 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('file_import_export');
+});
 // Route::get('/purchasing', function () {
 //     return view('pages.purchasing');
 // });
@@ -27,11 +27,13 @@
 // });
 
 
-Route::get('/', 'PagesController@index');
+// Route::get('/', 'PagesController@index');
 // Route::get('/finance', 'PagesController@finance');
 Route::get('/purchasing', 'PagesController@purchasing');
 Route::get('/purchasing/create', 'VendorsController@addvendor');
 Route::get('/purchasing/search', 'VendorsController@searchvendor');
+
+Route::get('/download', 'DownloadController@__construct');
 
 Route::get('/multiuploads', 'VendorsController@uploadForm');
 
@@ -41,4 +43,10 @@ Route::resource('vendor', 'VendorsController');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+
+Route::get('import-export-csv-excel',array('as'=>'excel.import','uses'=>'FileController@importExportExcelORCSV'));
+Route::post('import-csv-excel',array('as'=>'import-csv-excel','uses'=>'FileController@importFileIntoDB'));
+Route::get('download-excel-file/{type}', array('as'=>'excel-file','uses'=>'FileController@downloadExcelFile'));
 

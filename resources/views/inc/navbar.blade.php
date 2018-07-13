@@ -36,6 +36,7 @@
 
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="/home">Dashboard</a></li>
+                                <li><a href="/download">Download</a></li>
                                 
                                 <li>
                                     <a href="{{ route('logout') }}"
