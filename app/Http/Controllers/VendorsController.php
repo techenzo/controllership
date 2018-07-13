@@ -58,9 +58,11 @@ class VendorsController extends Controller
     public function store(Request $request)
     
     {
+
+    
         // Validation
         $this->validate($request, [
-            'vendor_name' => 'required',
+            'name' => 'required',
             'first_name' => 'required',  
             'last_name' => 'required',
             'address' => 'required',
@@ -87,7 +89,7 @@ class VendorsController extends Controller
        
         
         // Create New Vendor
-        $vendorName = $request->input('vendor_name');
+        $vendorName = $request->input('name');
         $fName = $request->input('first_name');
         $lName = $request->input('last_name');
         $add = $request->input('address');
@@ -139,6 +141,42 @@ class VendorsController extends Controller
         $vendor->status = '1';
         $vendor->save();
 
+
+
+
+        $this->validate($request, [
+            'name' => 'required',  
+            'photos'=>'required',
+            ]);
+     
+            if($request->hasFile('photos')){     
+                $allowedfileExtension=['pdf','jpg','png','docx','xlsx', 'csv'];    
+                $files = $request->file('photos');     
+                foreach($files as $file){     
+                $filename = $file->getClientOriginalName();     
+                $extension = $file->getClientOriginalExtension();     
+                $check=in_array($extension,$allowedfileExtension);
+            
+                // dd($check);
+        
+                if($check) {  
+                    $items= Item::create($request->all());   
+                        foreach ($request->photos as $photo) {  
+                            $filename = $photo->store('photos');  
+                            ItemDetails::create([   
+                                'item_id' => $items->id,  
+                                'filename' => $filename
+                            ]);
+                        }
+                        // echo "Upload Successfully";
+                        }
+                        else{
+                            echo '<div class="alert alert-warning"><strong>Warning!</strong> Sorry Only Upload png , jpg , doc, pdf, xlsx</div>';
+                        }
+                }
+            }
+
+
         return redirect('/home')->with('success', 'New Vendor Created');
     }
 
@@ -189,6 +227,7 @@ class VendorsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
         // return $request->all();
         //Validation
         $this->validate($request, [
@@ -254,6 +293,9 @@ class VendorsController extends Controller
         $vendor->expirationdate = $exp;
         $vendor->code = $code->code;
         $vendor->status = '1';
+
+        
+
         $vendor->save();
 
         return view('/home')->with('success', 'Vendor Updated');
@@ -311,7 +353,7 @@ class VendorsController extends Controller
     public function uploadSubmit(Request $request){  
         
         $this->validate($request, [
-            'name' => 'required',  
+            'vendor_name' => 'required',  
             'photos'=>'required',
             ]);
      

@@ -51,7 +51,7 @@
                             <th>Effective Date</th>
                             <th>Expiration Date</th>
                             <th>Created by</th>
-                            <th>Files</th>
+                            {{-- <th>Files</th> --}}
                             {{-- <th>Edit</th> --}}
                             {{-- <th>Delete</th> --}}
                         </thead>
@@ -80,7 +80,7 @@
                             <td>{{ $value->effectivedate}}</td>
                             <td>{{ $value->expirationdate}}</td>
                             <td>{{ $value->user['name']}}</td>
-                            <td><a href="vendor/{{$value->vendor_id}}/files">View</a></td>
+                            {{-- <td><a href="vendor/{{$value->vendor_id}}/files">View</a></td> --}}
 
                             {{-- <td>
                                 <a href="vendor/{{$value->vendor_id}}">

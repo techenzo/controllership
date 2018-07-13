@@ -28,7 +28,7 @@ class FileController extends Controller
     } 
     public function downloadExcelFile($type){
         $details = Vendor::get()->toArray();
-        return \Excel::create('expertphp_demo', function($excel) use ($details) {
+        return \Excel::create('Vendor Details', function($excel) use ($details) {
             $excel->sheet('sheet name', function($sheet) use ($details)
             {
                 $sheet->fromArray($details);

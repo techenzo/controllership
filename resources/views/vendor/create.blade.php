@@ -1,17 +1,57 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1 class="display-4">{{$title}}</h1>
+	<div class="row">
+		<section>
+        {!! Form::open(['action' => 'VendorsController@store', 'method' => 'POST', 'enctype' =>'multipart/form-data']) !!}{{ csrf_field() }}
+        <div class="wizard">
+            <div class="wizard-inner">
+                <div class="connecting-line"></div>
+                <ul class="nav nav-tabs" role="tablist">
 
-    <div class="row">
-        {!! Form::open(['action' => 'VendorsController@store', 'method' => 'POST', 'enctype' =>'multipart/form-data']) !!}
-        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-                <form role="form">
-                        <h2>Vendor Contact Info</h2>
-                        <hr class="colorgraph">
-                        <div class="form-group">
-                                <input type="text" name="vendor_name" id="vendor_name" class="form-control input-lg" placeholder="Vendor Company Name" tabindex="1">
-                        </div>
+                    <li role="presentation" class="active">
+                        <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Step 1">
+                            <span class="round-tab">
+                                <i class="glyphicon glyphicon-pencil"></i>
+                            </span>
+                        </a>
+                        
+                    </li>
+
+                    <li role="presentation" class="disabled">
+                        <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Step 2">
+                            <span class="round-tab">
+                                <i class="glyphicon glyphicon-tags"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li role="presentation" class="disabled">
+                        <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Step 3">
+                            <span class="round-tab">
+                                <i class="glyphicon glyphicon-book"></i>
+                            </span>
+                        </a>
+                    </li>
+
+                    <li role="presentation" class="disabled">
+                        <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Complete">
+                            <span class="round-tab">
+                                <i class="glyphicon glyphicon-picture"></i>
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <form role="form">
+                <div class="tab-content">
+                    {{-- STEP 1 --}}
+                    <div class="tab-pane active col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3" role="tabpanel" id="step1">
+                        <h3>Vendor Details</h3>
+                        
+                                <div class="form-group">
+                                        <input type="text" name="name" id="name" class="form-control input-lg" placeholder="Vendor Company Name" tabindex="1">
+                                </div>
                 
                         <div class="row">
                                 <div class="col-xs-12 col-sm-6 col-md-6">
@@ -36,57 +76,70 @@
                                                              
                         </div>
 
-                        {{-- @foreach($contract as $state)                                 
-                                        <li>{{$contract->type}}</li>  
-                        @endforeach --}}
+                        
+                        {{-- <ul class="list-inline pull-right">
+                            <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
+                        </ul> --}}
+                    </div>
+                    {{-- STEP 2 --}}
+                    <div class="tab-pane" role="tabpanel" id="step2">
+                        
                         {{-- Dropdown             --}}
-                        <div class="form-group contract">
-                                        <select name="contract" id ="contract"data-filter="make" class="filter-make filter form-control input-lg" tabindex="7">
-                                                <option value="0" disabled selected>Contract Type</option>
-                                                @foreach($contract as $state)                                 
-                                                <option>{{$state->value}}</option>     
-                                                @endforeach
+                        <div class="form-group contract col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+                                <h3>Contracts</h3>
+                                <select name="contract" id ="contract"data-filter="make" class="filter-make filter form-control input-lg" tabindex="7">
+                                        <option value="0" disabled selected>Contract Type</option>
+                                        @foreach($contract as $state)                                 
+                                        <option>{{$state->value}}</option>     
+                                        @endforeach
 
+                                </select>
+                                <br>
+                        
+                            <div class="row" id="filter">
+                            <form>
+                                
+                                <div id ="cat" class="form-group col-sm-6 col-xs-6 cat">
+                                        <select name="category" id ="category" data-filter="model" class="filter-model filter form-control input-lg" tabindex="8">
+                                                <option value="0" disabled selected>Category Type</option>
+                                                @foreach($category as $state)                                 
+                                                <option>{{ $state->value}}</option>     
+                                                @endforeach
                                         </select>
                                 </div>
-                        <div class="row" id="filter">
-                                <form>
-                                        
-                                        <div id ="cat" class="form-group col-sm-6 col-xs-6 cat">
-                                                <select name="category" id ="category" data-filter="model" class="filter-model filter form-control input-lg" tabindex="8">
-                                                        <option value="0" disabled selected>Category Type</option>
-                                                        @foreach($category as $state)                                 
-                                                        <option>{{ $state->value}}</option>     
-                                                        @endforeach
-                                                </select>
-                                        </div>
-                                        <div class="form-group col-sm-6 col-xs-6 hresources" >
-                                                <select name="department" id ="department"data-filter="type" class="filter-type filter form-control input-lg" tabindex="9">
-                                                        <option value="0" disabled selected>Not Applicable</option> 
-                                                        @foreach($department as $state)                                 
-                                                        <option>{{ $state->value}}</option>     
-                                                        @endforeach
-                                                </select>
-                                        </div>
-                                        
-                                </form>
-                        </div>
-
-                        <div class="row">
-                                <div class='col-sm-6'>
-                                <label for="comment">Effective Date</label>
-                                <input name="effectdate" type='text' class="form-control" id='effectdate' tabindex="10"/>
+                                <div class="form-group col-sm-6 col-xs-6 hresources" >
+                                        <select name="department" id ="department"data-filter="type" class="filter-type filter form-control input-lg" tabindex="9">
+                                                <option value="0" disabled selected>Not Applicable</option> 
+                                                @foreach($department as $state)                                 
+                                                <option>{{ $state->value}}</option>     
+                                                @endforeach
+                                        </select>
                                 </div>
-                                <div class='col-sm-6'>
-                                <label for="comment">Expiration Date</label>
-                                <input name="expiredate" type='text' class="form-control" id='expiredate' tabindex="11"/>
-                                </div>
-                        </div>
-                        <br>
+                                
+                            </form>
                         
-                      
+                </div>
 
-
+                <div class="row">
+                        <div class='col-sm-6'>
+                        <label for="comment">Effective Date</label>
+                        <input name="effectdate" type='text' class="form-control" id='effectdate' tabindex="10"/>
+                        </div>
+                        <div class='col-sm-6'>
+                        <label for="comment">Expiration Date</label>
+                        <input name="expiredate" type='text' class="form-control" id='expiredate' tabindex="11"/>
+                        </div>
+                </div>
+                <br>
+                        {{-- <ul class="list-inline pull-right">
+                            <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+                            <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
+                        </ul> --}}
+                    </div>
+                </div>
+                    {{-- STEP 3 --}}
+                    <div class="tab-pane col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3" role="tabpanel" id="step3">
+                        <h3>Terms</h3>
                         <div class="form-group">      
                                 @foreach($termination as $state)
                                 <label for="comment">{{ $state->title}}</label>
@@ -116,157 +169,60 @@
                                 @endforeach
                                 </textarea>
                         </div>
-
+                        {{-- <ul class="list-inline pull-right">
+                            <li><a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Step 2"><button type="button" class="btn btn-default prev-step">Previous</button></a></li>
+                            <li><button type="button" class="btn btn-default next-step">Next</button></li>  
+                        </ul> --}}
+                    </div>
+                    {{-- STEP 4 --}}
+                    <div class="tab-pane col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3" role="tabpanel" id="complete">
                         
-                        
+                                               
+                            <div class="modal-body form-group">
+                                    {{-- UPLOAD FILE --}}
+                                    <h3>Upload Files</h3>
+                                    <div class="form-group">
 
+                                            
+                                      
+                                                    
+                                            <div class="form-inline">
+                                            <center>
+                                                
+                                        
+                                            <div class="form-group">
+                                                    {{--Vendor name save files--}}                                                   
+                                                    {{-- <input type="text" id="js-upload-form" name="name" class="name" readonly>                                                                                                                                                                        --}}
+                                            </div>
+                                            <br>
+                                            <br>
+                                            <h5 class="modal-title" name="" id="exampleModalLongTitle">Select files from your computer.</h5>                    
+                                            <br>
+                                            <div class="form-group">
+                                                    
+                                                    <span class="btn btn-default btn-file">
+                                                            
+                                                    <input type="file" name="photos[]" id="js-upload-files" multiple>
+                                                    </span>
+                                                    &nbsp;
+                                           
+                                            <br>
+                                            <br>
+                                            {{-- <div class="row">
+                                            <div class="col-xs-12 col-md-6"><input type="submit" value="Save" class="btn btn-primary btn-block btn-lg" tabindex="20"></div>
+                                            </div> --}}
+                                            </form>
+                                            <button type="submit" class="btn btn-lg btn-primary" id="js-upload-submit">Save Now</button>
 
-                        
-                        {{-- pasword --}}
-                        {{-- <div class="row">
-                                <div class="col-xs-12 col-sm-6 col-md-6">
-                                        <div class="form-group">
-                                                <input type="password" name="password" id="password" class="form-control input-lg" placeholder="Password" tabindex="5">
-                                        </div>
-                                </div>
-                                <div class="col-xs-12 col-sm-6 col-md-6">
-                                        <div class="form-group">
-                                                <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-lg" placeholder="Confirm Password" tabindex="6">
-                                        </div>
-                                </div>
-                        </div> --}}
-                        <div class="row">
-                                <div class="col-xs-4 col-sm-3 col-md-3">
-                                        <span class="button-checkbox">
-                                                {{-- <button type="button" class="btn" data-color="info" tabindex="7">I Agree</button>      --}}
-                                                <!-- Button trigger modal -->
-                                                <button type="button" class="btn btn-secondary uploadfile" data-toggle="modal" data-target="#exampleModalCenter" tabindex="16">Upload Files</button>
-                  
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                                        <div class="modal-content">
-                                                        <div class="modal-header">
-                                                        <h5 class="modal-title" name="" id="exampleModalLongTitle">Select files from your computer.</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                        </div>
-                                                        <div class="modal-body form-group">
-                                                                {{-- UPLOAD FILE --}}
-                                                                
-                                                               
-                                                                <div class="form-group">
-                                                                   
-                                                                        {{-- <div class="col-sm-9">
-                                                                                <span class="btn btn-default btn-file">
-                                                                                <input id="input-2" name="input2[]" type="file" class="file" multiple data-show-upload="true" data-show-caption="true">
-                                                                                </span>
-                                                                        </div>
-                                                                        <br> --}}
-
-                                                                        <!-- Standar Form -->
-                                                                        
-                                                                        <form action="/multiuploads" method="post" enctype="multipart/form-data" id="js-upload-form">
-                                                                                {{ csrf_field() }}
-                                                                        <div class="form-inline">
-                                                                        <center>
-                                                                               
-                                                                    
-                                                                        <div class="form-group">
-                                                                                {{--Vendor name save files--}}                                                   
-                                                                                <input type="text" name="name" class="name" readonly>                                                                                                                                                                       
-                                                                         </div>
-                                                                        <br>
-                                                                        <br>
-                                                                                          
-
-                                                                        <div class="form-group">
-                                                                                
-                                                                                <span class="btn btn-default btn-file">
-                                                                                        
-                                                                                <input type="file" name="photos[]" id="js-upload-files" multiple>
-                                                                                </span>
-                                                                                &nbsp;
-                                                                        </div>
-                                                                        
-                                                                        <button type="submit" class="btn btn-sm btn-primary" id="js-upload-submit">Upload files</button>
-                                                                        </div>
-                                                                        </form>
-
-                                                                        <!-- Drop Zone -->
-                                                                        {{-- <h4 class="text-center">Or drag and drop files below</h4>
-                                                                        <div class="upload-drop-zone" id="drop-zone">
-                                                                        Just drag and drop files here
-                                                                        </div> --}}
-
-                                                                        <!-- Progress Bar -->
-                                                                        {{-- <div class="progress">
-                                                                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-                                                                        <span class="sr-only">60% Complete</span>
-                                                                        </div>
-                                                                        </div> --}}
-
-                                                                        <!-- Upload Finished -->
-                                                                        {{-- <div class="js-upload-finished">
-                                                                        <h3>Processed files</h3>
-                                                                        <div class="list-group">
-                                                                        <a href="#" class="list-group-item list-group-item-success"><span class="badge alert-success pull-right">Success</span>image-01.jpg</a>
-                                                                        <a href="#" class="list-group-item list-group-item-success"><span class="badge alert-success pull-right">Success</span>image-02.jpg</a>
-                                                                        </div>
-                                                                        </div> --}}
-                                                                        </center>
-                                                                </div>
-                                                                
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
-                                                        {{-- <button type="button" class="btn btn-primary">Save</button> --}}
-                                                        </div>
-                                                        </div>
-                                                        </div>
-                                                </div>
-                                        </span>
-                                </div>
-                                <div class="col-xs-8 col-sm-9 col-md-9">
-                                        <input type="checkbox" name="t_and_c" id="t_and_c" class="hidden" value="1">
-                                        By clicking <strong class="label label-primary">Register</strong>, you agree to the <a href="#" data-toggle="modal" data-target="#t_and_c_m" tabindex="18">Terms and Conditions</a> set out by this site, including our Cookie Use.
-                                </div>
-                        </div>
-                        
-                        <hr class="colorgraph">
-                        
-                        <div class="row">
-                                <div class="col-xs-12 col-md-6"><a href="/home" class="btn btn-danger btn-block btn-lg" tabindex="19">Cancel</a></div>
-                                <div class="col-xs-12 col-md-6"><input type="submit" value="Register" class="btn btn-primary btn-block btn-lg" tabindex="20"></div>
-                        </div>
-                        <br>
-                </form>
+                                          
+                                    </div>
+                                    
+                            </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
                 {!! Form::close() !!}
-                <!-- Modal -->
-                <div class="modal fade" id="t_and_c_m" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                        <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                                <h4 class="modal-title" id="myModalLabel">Terms & Conditions</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, itaque, modi, aliquam nostrum at sapiente consequuntur natus odio reiciendis perferendis rem nisi tempore possimus ipsa porro delectus quidem dolorem ad.</p>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, itaque, modi, aliquam nostrum at sapiente consequuntur natus odio reiciendis perferendis rem nisi tempore possimus ipsa porro delectus quidem dolorem ad.</p>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, itaque, modi, aliquam nostrum at sapiente consequuntur natus odio reiciendis perferendis rem nisi tempore possimus ipsa porro delectus quidem dolorem ad.</p>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, itaque, modi, aliquam nostrum at sapiente consequuntur natus odio reiciendis perferendis rem nisi tempore possimus ipsa porro delectus quidem dolorem ad.</p>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, itaque, modi, aliquam nostrum at sapiente consequuntur natus odio reiciendis perferendis rem nisi tempore possimus ipsa porro delectus quidem dolorem ad.</p>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, itaque, modi, aliquam nostrum at sapiente consequuntur natus odio reiciendis perferendis rem nisi tempore possimus ipsa porro delectus quidem dolorem ad.</p>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, itaque, modi, aliquam nostrum at sapiente consequuntur natus odio reiciendis perferendis rem nisi tempore possimus ipsa porro delectus quidem dolorem ad.</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                                <button type="button" class="btn btn-primary" data-dismiss="modal">I Agree</button>
-                                        </div>
-                                </div><!-- /.modal-content -->
-                        </div><!-- /.modal-dialog -->
-                </div><!-- /.modal -->
-              
-                
-@endsection
-
+        </div>
+    </section>
+   </div>
+   @endsection

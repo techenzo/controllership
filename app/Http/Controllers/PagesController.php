@@ -24,7 +24,7 @@ class PagesController extends Controller
 
     public function purchasing(){
         $title ='Controllership Contract Repository';
-        $vendors = Vendor::where('status', '1')->paginate(10);
+        $vendors = Vendor::where('status', '1')->orderBy('expirationdate', 'ASC')->paginate(10);
         
     
         return view('pages.purchasing', compact('title', 'vendors'));
@@ -52,6 +52,7 @@ class PagesController extends Controller
         
         
         // return $all;
+        
         return view('vendor.create', compact('penalty','spend','payment','termination','contract', 'category', 'department', 'title'));
         
     }

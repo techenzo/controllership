@@ -59,16 +59,20 @@
                         
                                 {{$vendors->links()}}
 
-                                <div align="center">
-                                        <a href="purchasing/create" >
-                                        <button class="btn btn-add btn-primary"><span class="glyphicon glyphicon-plus"> New Vendor</span></button>
-                                        </a>   
-                                </div>
+                                
 
                                
                                 @else
-                                <h1>You have no vendor post.</h1>                                        
+                                <h1 align="center">You have no vendor post.</h1>                                        
                                 @endif
+
+                                <br>
+
+                                <div align="center">
+                                    <a href="purchasing/create" >
+                                    <button class="btn btn-add btn-primary"><span class="glyphicon glyphicon-plus"> New Vendor</span></button>
+                                    </a>   
+                                </div>
                             </div>
                         </div>
                     </div>
