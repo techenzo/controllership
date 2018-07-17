@@ -100,12 +100,24 @@
                                 <textarea class="form-control" tabindex="15" rows="5" name = "penalty" id="penalty">{{ $vendor->penalty}}
                                 </textarea>
                         </div>
+                        {{-- files can be download --}}
+                        <ul>    
+                                @foreach ($files as $filename)
+                        <li><a href="{{$filename}}">
+                                      {{$filename}}
+
+                                </li>
+                                @endforeach
+                        </ul>
                         {{-- buttons --}}
                         <hr class="colorgraph">      
                         <div class="row">
                                 <div class="col-xs-12 col-md-6"><a href="/home" class="btn btn-danger btn-block btn-lg" tabindex="16">Cancel</a></div>
                                 <div class="col-xs-12 col-md-6"><input type="submit" value="Update" class="btn btn-primary btn-block btn-lg" tabindex="17"></div>
                         </div><br>
+                        
+
+                        
                         {!! Form::close() !!}
                                 
             <div>

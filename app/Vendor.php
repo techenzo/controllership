@@ -21,6 +21,10 @@ class Vendor extends Model
         return $this->belongsTo('App\User');
     }
 
+    public function item(){
+        return $this->belongsTo('App\Item');
+    }
+
     public function scopeSearch($query, $s){
         return $query->Where ('firstname', 'like', '%' .$s. '%')
             ->orWhere('vendor', 'like', '%' .$s. '%');

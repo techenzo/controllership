@@ -190,16 +190,27 @@ class VendorsController extends Controller
     {
         // baguhin mo to mamaya.
         $vendor = Vendor::whereVendorId($id)->first();
+        //Get vendor name
+        $vendorname = Vendor::select('vendor')->where('vendor_id', $id)->first();
+        $name =  $vendor->vendor;
+        //Get item id
+        $id = Item::select('id')->where('name', $name)->get();
+        //Get file name
+        $files = Itemdetails::select('filename')->wherein('item_id', $id)->pluck('filename');
 
-        return view('vendor.edit', compact('vendor'));
+        
+  
+        return view('vendor.edit', compact('vendor', 'files'));
     }
 
     public function showfiles($id)
     {
         // baguhin mo to mamaya.
         $vendor = ItemDetails::wherename($id)->first();
+        // $id = DB::select('SELECT id FROM items WHERE name ="'.$name.'" ');
 
-        return view('vendor.edit', compact('vendor'));
+
+        return view('vendor.edit', compact('vendor', 'files'));
     }
 
     /**

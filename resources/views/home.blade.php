@@ -28,7 +28,7 @@
                                             <th>First Name</th>
                                             <th>Last Name</th>
                 
-                                            <th>Edit</th>
+                                            <th>View</th>
                                     </thead>
                                     @foreach($vendors as $value)
                                     <tr>    <td>
@@ -47,7 +47,7 @@
                                                 <a href="vendor/{{$value->vendor_id}}">
                                                 <p data-placement="top" data-toggle="tooltip" title="Edit">
                                                     <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="" >
-                                                        <span class="glyphicon glyphicon-pencil"></span>
+                                                        <span class="glyphicon glyphicon-eye-open"></span>
                                                     </button>
                                                 </p>
                                                 </a>

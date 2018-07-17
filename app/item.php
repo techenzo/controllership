@@ -10,4 +10,12 @@ class item extends Model
 
     // source code upload multiple files
     // https://www.cloudways.com/blog/laravel-multiple-files-images-upload/
+
+    public function vendor(){
+        return $this->hasMany('App\Vendor');
+    }
+
+
+
+
 }
