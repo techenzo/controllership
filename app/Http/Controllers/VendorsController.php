@@ -162,7 +162,7 @@ class VendorsController extends Controller
                 if($check) {  
                     $items= Item::create($request->all());   
                         foreach ($request->photos as $photo) {  
-                            $filename = $photo->store('photos');  
+                            $filename = $photo->store('public');  
                             ItemDetails::create([   
                                 'item_id' => $items->id,  
                                 'filename' => $filename
@@ -174,6 +174,8 @@ class VendorsController extends Controller
                             echo '<div class="alert alert-warning"><strong>Warning!</strong> Sorry Only Upload png , jpg , doc, pdf, xlsx</div>';
                         }
                 }
+            
+
             }
 
 
@@ -197,9 +199,9 @@ class VendorsController extends Controller
         $id = Item::select('id')->where('name', $name)->get();
         //Get file name
         $files = Itemdetails::select('filename')->wherein('item_id', $id)->pluck('filename');
-
-        
-  
+       
+      
+ 
         return view('vendor.edit', compact('vendor', 'files'));
     }
 
@@ -227,6 +229,8 @@ class VendorsController extends Controller
         //     return redirect('/posts')->with('error', 'Unauthorized Page');
         // }
         return view('pages.purchasing', compact('vendorid'));
+
+        
     }
 
     /**
@@ -239,77 +243,35 @@ class VendorsController extends Controller
     public function update(Request $request, $id)
     {
         
-        // return $request->all();
-        //Validation
-        $this->validate($request, [
-            'vendor_name' => 'required',
-            'first_name' => 'required',  
-            'last_name' => 'required',
-            'address' => 'required',
-            'email' => 'required',
-            'weburl' => 'required',
-
-            'termination' =>'required',
-            'payment' =>'required',
-            'spend' =>'required',
-            'penalty' =>'required',
-
-            'effectdate' =>'required',
-            'expiredate' =>'required'
-
-            
-
-        ]);
-        
-        // Update Vendor
-        $vendorName = $request->input('vendor_name');
-        $fName = $request->input('first_name');
-        $lName = $request->input('last_name');
-        $add = $request->input('address');
-        $mail= $request->input('email');
-        $web = $request->input('weburl');
-
-        $t= $request->input('termination');
-        $p = $request->input('payment');
-        $s = $request->input('spend');
-        $p2 = $request->input('penalty');
-
-
-        $eff = $request->input('effectdate');
-        $exp= $request->input('expiredate');
-      
-        //Get code
-        $code = Contract::select('code')->where('value', $con)->first();
- 
         
 
+        
+        
         $vendor = Vendor::find($id);
-        $vendor->vendor = $vendorName;
-        $vendor->firstname = $fName;
-        $vendor->lastname = $lName;
-        $vendor->address = $add;
-        $vendor->email = $mail;
-        $vendor->weburl = $web;
+        $vendor->vendor = $request->input('name');
+        $vendor->firstname = $request->input('first_name');
+        $vendor->lastname = $request->input('last_name');
+        $vendor->address = $request->input('address');
+        $vendor->email = $request->input('email');
+        $vendor->weburl = $request->input('weburl');
         $vendor->contract = $request->input('contract');
         $vendor->category = $request->input('category');
         $vendor->department = $request->input('department');
 
 
-        $vendor->termination = $t;
-        $vendor->payment = $p;
-        $vendor->spend = $s;
-        $vendor->penalty = $p2;
+        $vendor->termination = $request->input('termination');
+        $vendor->payment = $request->input('payment');
+        $vendor->spend = $request->input('spend');
+        $vendor->penalty = $request->input('penalty');
 
-        $vendor->effectivedate = $eff;
-        $vendor->expirationdate = $exp;
-        $vendor->code = $code->code;
+        $vendor->effectivedate = $request->input('effectdate');
+        $vendor->expirationdate = $request->input('expiredate');
+       
+        $vendor->user_id = auth()->user()->id;
         $vendor->status = '1';
-
-        
-
         $vendor->save();
-
-        return view('/home')->with('success', 'Vendor Updated');
+        
+        return redirect('/home')->with('success', 'Vendor Updated');
     }
 
     /**

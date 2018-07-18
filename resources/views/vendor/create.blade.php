@@ -143,21 +143,21 @@
                         <div class="form-group">      
                                 @foreach($termination as $state)
                                 <label for="comment">{{ $state->title}}</label>
-                                <textarea class="form-control" rows="5" name ="termination" id="termination" tabindex="12">
+                                <textarea class="form-control" rows="5" name ="termination" id="termination" tabindex="12">{{ $state->terms}}
                                 @endforeach
                                 </textarea>
                         </div>
                         <div class="form-group">
                                 @foreach($payment as $state)
                                 <label for="comment">{{ $state->title}}</label>
-                                <textarea class="form-control" rows="5" name= "payment" id="payment" tabindex="13">
+                                <textarea class="form-control" rows="5" name= "payment" id="payment" tabindex="13">{{ $state->terms}}
                                 @endforeach
                                 </textarea>
                         </div>
                         <div class="form-group">
                                 @foreach($spend as $state)
                                 <label for="comment">{{ $state->title}}</label>
-                                <textarea class="form-control" rows="5" name = "spend" id="spend" tabindex="14">
+                                <textarea class="form-control" rows="5" name = "spend" id="spend" tabindex="14">{{ $state->terms}}
                                 @endforeach
                                 </textarea>
                         </div>
@@ -165,7 +165,7 @@
                         <div class="form-group">
                                 @foreach($penalty as $state)
                                 <label for="comment">{{ $state->title}}</label>
-                                <textarea class="form-control" rows="5" name = "penalty" id="penalty" tabindex="15">
+                                <textarea class="form-control" rows="5" name = "penalty" id="penalty" tabindex="15">{{ $state->terms}}
                                 @endforeach
                                 </textarea>
                         </div>

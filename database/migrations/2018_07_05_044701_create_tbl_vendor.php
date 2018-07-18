@@ -14,7 +14,7 @@ class CreateTblVendor extends Migration
     public function up()
     {
         Schema::create('tbl_vendors_info', function (Blueprint $table) {
-            $table->increments('vendor_id');
+            $table->increments('id');
             $table->string('vendor');
             $table->string('firstname');
             $table->string('lastname');
@@ -33,6 +33,7 @@ class CreateTblVendor extends Migration
             $table->longText('payment');
             $table->longText('spend');
             $table->longText('penalty');
+            $table->string('code');
             $table->timestamps();
         });
     }

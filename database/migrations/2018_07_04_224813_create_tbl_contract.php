@@ -17,8 +17,7 @@ class CreateTblContract extends Migration
             $table->increments('contract_id');
             $table->string('type');
             $table->string('value');
-            $table->date('effectivedate');
-            $table->date('expirationdate');
+            $table->string('code');
         });
     }
 
