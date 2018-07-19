@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTblTerms extends Migration
+class CreateContractsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateTblTerms extends Migration
      */
     public function up()
     {
-        Schema::create('tbl_terms', function (Blueprint $table) {
+        Schema::create('contracts', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
             $table->string('type');
-            $table->longText('terms');
-         
+            $table->string('value');
+            $table->string('code');
         });
     }
 
@@ -29,7 +28,6 @@ class CreateTblTerms extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tbl_terms');
+        Schema::dropIfExists('contracts');
     }
 }
-

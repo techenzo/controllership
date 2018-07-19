@@ -623,10 +623,6 @@ $(".uploadfile").click(function () {
     inputTwo.val(inputOne.val());
 });
 
-$("#js-upload-submit").click(function () {
-    $("##exampleModalCenter").modal('hide');
-});
-
 /***/ }),
 /* 3 */
 /***/ (function(module, exports) {

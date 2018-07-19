@@ -3,7 +3,7 @@
 @section('content')
 	<div class="row">
 		<section>
-        {!! Form::open(['action' => 'VendorsController@store', 'method' => 'POST', 'enctype' =>'multipart/form-data']) !!}{{ csrf_field() }}
+        {!! Form::open(['action' => 'VendorsController@store', 'method' => 'POST', 'enctype' =>'multipart/form-data']) !!}
         <div class="wizard">
             <div class="wizard-inner">
                 <div class="connecting-line"></div>
@@ -72,7 +72,7 @@
                                         <input type="email" name="email" id="email" class="form-control input-lg" placeholder="Email Address" tabindex="5">
                                 </div>
                                 <div class="form-group">
-                                        <input type="text" name="weburl" id="weburl" class="form-control input-lg" placeholder="Website Url" tabindex="6">
+                                        <input type="text" name="web_url" id="web_url" class="form-control input-lg" placeholder="Website Url" tabindex="6">
                                                              
                         </div>
 
@@ -87,7 +87,7 @@
                         {{-- Dropdown             --}}
                         <div class="form-group contract col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
                                 <h3>Contracts</h3>
-                                <select name="contract" id ="contract"data-filter="make" class="filter-make filter form-control input-lg" tabindex="7">
+                                <select name="contract_type" id ="contract_type" data-filter="make" class="filter-make filter form-control input-lg" tabindex="7">
                                         <option value="0" disabled selected>Contract Type</option>
                                         @foreach($contract as $state)                                 
                                         <option>{{$state->value}}</option>     
@@ -100,7 +100,7 @@
                             <form>
                                 
                                 <div id ="cat" class="form-group col-sm-6 col-xs-6 cat">
-                                        <select name="category" id ="category" data-filter="model" class="filter-model filter form-control input-lg" tabindex="8">
+                                        <select name="category_type" id ="category_type" data-filter="model" class="filter-model filter form-control input-lg" tabindex="8">
                                                 <option value="0" disabled selected>Category Type</option>
                                                 @foreach($category as $state)                                 
                                                 <option>{{ $state->value}}</option>     
@@ -123,11 +123,11 @@
                 <div class="row">
                         <div class='col-sm-6'>
                         <label for="comment">Effective Date</label>
-                        <input name="effectdate" type='text' class="form-control" id='effectdate' tabindex="10"/>
+                        <input name="effectivedate" type='text' class="form-control" id='effectdate' tabindex="10"/>
                         </div>
                         <div class='col-sm-6'>
                         <label for="comment">Expiration Date</label>
-                        <input name="expiredate" type='text' class="form-control" id='expiredate' tabindex="11"/>
+                        <input name="expirationdate" type='text' class="form-control" id='expiredate' tabindex="11"/>
                         </div>
                 </div>
                 <br>
@@ -143,21 +143,21 @@
                         <div class="form-group">      
                                 @foreach($termination as $state)
                                 <label for="comment">{{ $state->title}}</label>
-                                <textarea class="form-control" rows="5" name ="termination" id="termination" tabindex="12">{{ $state->terms}}
+                                <textarea class="form-control" rows="5" name ="termination" id="termination" tabindex="12">
                                 @endforeach
                                 </textarea>
                         </div>
                         <div class="form-group">
                                 @foreach($payment as $state)
                                 <label for="comment">{{ $state->title}}</label>
-                                <textarea class="form-control" rows="5" name= "payment" id="payment" tabindex="13">{{ $state->terms}}
+                                <textarea class="form-control" rows="5" name= "payment" id="payment" tabindex="13">
                                 @endforeach
                                 </textarea>
                         </div>
                         <div class="form-group">
                                 @foreach($spend as $state)
                                 <label for="comment">{{ $state->title}}</label>
-                                <textarea class="form-control" rows="5" name = "spend" id="spend" tabindex="14">{{ $state->terms}}
+                                <textarea class="form-control" rows="5" name = "spend" id="spend" tabindex="14">
                                 @endforeach
                                 </textarea>
                         </div>
@@ -165,7 +165,7 @@
                         <div class="form-group">
                                 @foreach($penalty as $state)
                                 <label for="comment">{{ $state->title}}</label>
-                                <textarea class="form-control" rows="5" name = "penalty" id="penalty" tabindex="15">{{ $state->terms}}
+                                <textarea class="form-control" rows="5" name = "penalty" id="penalty" tabindex="15">
                                 @endforeach
                                 </textarea>
                         </div>

@@ -13,7 +13,7 @@ class AddUseridToVendor extends Migration
      */
     public function up()
     {
-        Schema::table('tbl_vendors_info', function($table){
+        Schema::table('vendors', function($table){
             $table->integer('user_id');
             });
     }
@@ -25,7 +25,7 @@ class AddUseridToVendor extends Migration
      */
     public function down()
     {
-        Schema::table('tbl_vendors_info', function($table){
+        Schema::table('vendors', function($table){
             $table->dropColumn('user_id');
             });
     }

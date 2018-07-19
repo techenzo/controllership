@@ -63,17 +63,17 @@
                             <td>   
                             {{$value->code}}
                             <?php
-                            $num = $value->vendor_id;
+                            $num = $value->id;
                             $num_padded = sprintf("%06d", $num);
                             echo $num_padded;
                             ?>
                             </td>
-                            <td>{{ $value->vendor}}</td>
-                            <td>{{ $value->firstname}}</td>
-                            <td>{{ $value->lastname}}</td>
+                            <td>{{ $value->name}}</td>
+                            <td>{{ $value->first_name}}</td>
+                            <td>{{ $value->last_name}}</td>
                             <td>{{ $value->address}}</td>
                             <td>{{ $value->email}}</td>
-                            <td>{{ $value->weburl}}</td>
+                            <td>{{ $value->web_url}}</td>
                             {{-- <td>{{ $value->contract}}</td>
                             <td>{{ $value->category}}</td>
                             <td>{{ $value->department}}</td> --}}

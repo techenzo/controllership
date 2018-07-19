@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTblContract extends Migration
+class CreateTermsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,14 @@ class CreateTblContract extends Migration
      */
     public function up()
     {
-        Schema::create('tbl_contract', function (Blueprint $table) {
-            $table->increments('contract_id');
+        Schema::create('terms', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('title');
             $table->string('type');
-            $table->string('value');
-            $table->string('code');
+            $table->longText('terms');
         });
     }
 
-    
     /**
      * Reverse the migrations.
      *
@@ -29,6 +28,6 @@ class CreateTblContract extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tbl_contract');
+        Schema::dropIfExists('terms');
     }
 }

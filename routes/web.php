@@ -35,7 +35,7 @@ Route::get('/purchasing/create', 'VendorsController@addvendor');
 Route::get('/purchasing/search', 'VendorsController@searchvendor');
 
 
-
+Route::resource('status', 'DeleteStatusController');
 Route::get('/multiuploads', 'VendorsController@uploadForm');
 
 Route::post('/upload', 'VendorsController@uploadSubmit');

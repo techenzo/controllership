@@ -19,7 +19,7 @@ class FileController extends Controller
                     $arr[] = ['vendor' => $value->vendor, 'firstname' => $value->firstname];
                 }
                 if(!empty($arr)){
-                    \DB::table('tbl_vendors_info')->insert($arr);
+                    DB::table('vendors')->insert($arr);
                     dd('Insert Record successfully.');
                 }
             }
