@@ -181,7 +181,7 @@ class VendorsController extends Controller
     {
         // baguhin mo to mamaya.
         // $vendor = Vendor::whereVendorId($id)->first();
-        return $vendor = Vendor::find($id);
+        $vendor = Vendor::find($id);
         //Get vendor name
         $vendorname = Vendor::select('name')->where('id', $id)->first();
         $name =  $vendor->vendor;
@@ -192,7 +192,7 @@ class VendorsController extends Controller
        
       
  
-        return view('vendor.edit', compact('vendor', 'files'));
+        return view('vendor.show', compact('vendor', 'files'));
     }
 
     public function showfiles($id)

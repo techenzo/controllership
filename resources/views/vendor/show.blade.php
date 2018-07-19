@@ -1,140 +1,100 @@
 @extends('layouts.app')
 
+
 @section('content')
 
-    <h1 class="display-4">Controllership Contract Repositorydddd</h1>
-    <div class="container">
-        {{-- search bar --}}
-        <div class="row">
-            <div class="col-md-12">
-                <div class="input-group" id="adv-search">
-                    <input type="text" class="form-control" placeholder="Search Vendors" />
-                    <div class="input-group-btn">
-                        <div class="btn-group" role="group">
-                            <div class="dropdown dropdown-lg">
-                            {{-- button search --}}
-                            <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>&nbsp;
-                            <button type="button" class="btn btn-primary">Add</button>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-            </div>        
-        </div>
-        {{-- data table --}}
-        <div class="row">
-            <div class="col">
-                <h4>Vendors Details</h4>
-                <div class="table-responsive">    
-                    <table id="mytable" class="table table-bordred table-striped"> 
-                        <thead>  
-                            <th><!--<input type="checkbox" id="checkall" />--></th>
-                            <th>Vedor Name</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Address</th>
-                            <th>Email</th>
-                            <th>Web Url</th>
-                            <th>Contract Type</th>
-                            <th>Category Type</th>
-                            <th>Department</th>
-                            <th>Effective Date</th>
-                            <th>Expiration Date</th>
-
-                            <th>Edit</th>
-                            <th>Delete</th>
-                        </thead>
-                        <tbody>
-                        @foreach ($vendors as $value)
-                        <tr>     
-                            <td><input type="checkbox" class="checkthis" /></td>
-                            <td>{{ $value->vendor}}</td>
-                            <td>{{ $value->firstname}}</td>
-                            <td>{{ $value->lastname}}</td>
-                            <td>{{ $value->address}}</td>
-                            <td>{{ $value->email}}</td>
-                            <td>{{ $value->weburl}}</td>
-                            <td>{{ $value->contract}}</td>
-                            <td>{{ $value->category}}</td>
-                            <td>{{ $value->department}}</td>
-                            <td>{{ $value->effectivedate}}</td>
-                            <td>{{ $value->expirationdate}}</td>
-
-                            <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-                            <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
-                        </tr>
-                        @endforeach 
-                        </tbody>
-                    </table>
-                    <div class="clearfix"></div>
-                        {{-- Pagination --}}
-                        <ul class="pagination pull-right">
-                            <li class="disabled"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
-                        </ul>  
-                    </div>
-                </div>
+<div class="container">
+	<div class="row">
+		<h2>{{$vendor->name}}</h2>
+	</div>
+    <div class="row">
+        <fieldset class="for-panel">
+          <legend>Contract Details</legend>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-horizontal">               
+                  <label class="col-xs-5 control-label">Contract Type:</label>
+                  <p class="form-control-static">{{$vendor->contract_type}}</p>               
+                  <label class="col-xs-5 control-label">Category: </label>
+                  <p class="form-control-static">{{$vendor->category_type}}</p>               
+                    <label class="col-xs-5 control-label">Department: </label>
+                    <p class="form-control-static">{{$vendor->department}}</p>                           
+              </div>
             </div>
-        </div>
-        {{-- modal area for edit --}}
-        <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    {{-- {!! Form::open(['action' => 'VendorsController@update', 'method' => 'POST', 'enctype' =>'multipart/form-data']) !!} --}}
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                        <h4 class="modal-title custom_align" id="Heading"></h4>
-                    </div>
-                        {{-- edit form --}}
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <input name = "first_name" id ="first_name" class="form-control " type="text" placeholder="First Name">
-                            </div>
-                            <div class="form-group">
-                                <input name = "last_name" id ="last_name" class="form-control " type="text" placeholder="Last Name">
-                            </div>
-                            <div class="form-group">
-                                <textarea name = "address" id ="address" rows="2" class="form-control" placeholder="Address"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <input name = "email" id ="email" class="form-control " type="email" placeholder="Email">
-                            </div>
-                            <div class="form-group">
-                                <input name = "weburl" id ="weburl" class="form-control " type="text" placeholder="Website Url">
-                            </div>
-                        </div>
-                    <div class="modal-footer ">
-                        <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
-                    </div>
-                    {{-- {!! Form::close() !!} --}}
-                </div>
-            <!-- /.modal-content --> 
+            <div class="col-sm-6">
+              <div class="form-horizontal">               
+                  <label class="col-xs-4 control-label">Effective Date: </label>
+                  <p class="form-control-static">{{$vendor->effectivedate}}</p>             
+                  <label class="col-xs-4 control-label">Expiration Date:</label>
+                  <p class="form-control-static">{{$vendor->expirationdate}}</p>              
+                                
+              </div>
             </div>
-            <!-- /.modal-dialog --> 
-        </div>
-        {{-- modal area for delete --}}
-        <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                            <h4 class="modal-title custom_align" id="Heading">Delete this entry</h4>
-                        </div>
-                            <div class="modal-body">
-                                <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete this Record?</div>
-                            </div>
-                        <div class="modal-footer ">
-                            <button type="button" class="btn btn-success" ><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
-                        </div>
-                    </div>
-                <!-- /.modal-content --> 
-                </div>
-                <!-- /.modal-dialog --> 
+          </div>
+        </fieldset>
     </div>
+
+    <div class="row">
+        <fieldset class="for-panel">
+          <legend>Contact Info</legend>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-horizontal">               
+                  <label class="col-xs-5 control-label">Contact Name:</label>
+                  <p class="form-control-static">{{$vendor->first_name}} {{$vendor->last_name}}</p>               
+                  <label class="col-xs-5 control-label">Address: </label>
+                  <p class="form-control-static">{{$vendor->address}}</p>               
+                                          
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-horizontal">               
+                  <label class="col-xs-4 control-label">Email Address: </label>
+                  <p class="form-control-static">{{$vendor->email}}</p>             
+                  <label class="col-xs-4 control-label">Website Url:</label>
+                  <p class="form-control-static">{{$vendor->web_url}}</p>              
+                                
+              </div>
+            </div>
+          </div>
+        </fieldset>
+    </div>
+
+
+    <hr>
+    <div class="form-group">
+            <h4 align="center">Terms and Condition:</h4>
+            <div class="col-xs-12">
+                <div style="border: 1px solid #e5e5e5; height: 200px; overflow: auto; padding: 10px;">
+                    <p><label for="Terms of Termination">1. Terms of Termination :</label></p>
+                    <p>{{$vendor->termination}}</p>
+                    <p><label for="Terms of Termination">2. Terms of Payment :</label></p>
+                    <p>{{$vendor->payment}}</p>
+                    <p><label for="Terms of Termination">3. Estimated Yearly Spend :</label></p>
+                    <p>{{$vendor->spend}}</p>
+                    <p><label for="Terms of Termination">4. Terms of Penalty :</label></p>
+                    <p>{{$vendor->penalty}}</p>
+        
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="colorgraph">      
+    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+        <div class="col-xs-12 col-md-6"><a href="/home" class="btn btn-danger btn-block btn-lg" tabindex="1">Back</a></div>
+        <div class="col-xs-12 col-md-6"><input type="submit" value="" class="btn btn-primary btn-block btn-lg" tabindex="2"></div><br>
+    </div>
+    
+                        
+
+
+
+
+
+</div>
+
+
+</div>
 @endsection
+
