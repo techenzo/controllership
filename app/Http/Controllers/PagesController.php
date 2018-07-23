@@ -22,13 +22,13 @@ class PagesController extends Controller
         return view('pages.index')->with('title', $title);
     }
 
-    public function purchasing(){
-        $title ='Controllership Contract Repository';
-        $vendors = Vendor::where('status_id', '1')->orderBy('expirationdate', 'ASC')->paginate(10);
+    // public function purchasing(){
+    //     $title ='Controllership Contract Repository';
+    //     $vendors = Vendor::where('status_id', '1')->orderBy('expirationdate', 'ASC')->paginate(10);
         
     
-        return view('pages.purchasing', compact('title', 'vendors'));
-    }
+    //     return view('pages.purchasing', compact('title', 'vendors'));
+    // }
 
    
 

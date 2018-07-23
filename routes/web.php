@@ -29,8 +29,9 @@
 
 Route::get('/', 'PagesController@index');
 Route::get('/finance', 'PagesController@finance');
-Route::get('/purchasing', 'PagesController@purchasing');
+Route::get('/purchasing', 'SortingController@index');
 Route::resource('vendor', 'VendorsController');
+Route::resource('search', 'SortingController');
 Route::get('/purchasing/create', 'VendorsController@addvendor');
 Route::get('/purchasing/search', 'VendorsController@searchvendor');
 
@@ -54,3 +55,5 @@ Route::get('/storage/{filename}', function ($filename)
 {
     return Image::make(storage_path('public/' . $filename))->response();
 });
+
+

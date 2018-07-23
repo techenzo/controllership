@@ -66,7 +66,7 @@
                                             </td>
 
                                             <td>
-                                                {!!Form::open(['action' => ['DeleteStatusController@update', $value->id], 'method' => 'PUT'])!!}
+                                                {!!Form::open(['action' => ['DeleteStatusController@update', $value->id], 'method' => 'PUT', 'id' => 'FormDeleteTime'])!!}
                                                 <p data-placement="top" data-toggle="tooltip" title="Edit">
                                                     <button class="btn btn-danger btn-xs" data-title="Edit" data-toggle="modal" data-target="" >
                                                         <span class="glyphicon glyphicon-trash"></span>

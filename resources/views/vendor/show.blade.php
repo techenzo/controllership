@@ -83,15 +83,9 @@
     <hr class="colorgraph">      
     <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
         <div class="col-xs-12 col-md-6"><a href="/home" class="btn btn-danger btn-block btn-lg" tabindex="1">Back</a></div>
-        <div class="col-xs-12 col-md-6"><input type="submit" value="" class="btn btn-primary btn-block btn-lg" tabindex="2"></div><br>
+        <div class="col-xs-12 col-md-6"><input type="submit" value="Save" class="btn btn-primary btn-block btn-lg" tabindex="2"></div>
     </div>
     
-                        
-
-
-
-
-
 </div>
 
 

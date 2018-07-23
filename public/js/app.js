@@ -541,12 +541,22 @@ module.exports = defaults;
 
 $(document).ready(function () {
 
+    // search with filters
+    $('.search-panel .dropdown-menu').find('a').click(function (e) {
+        e.preventDefault();
+        var param = $(this).attr("href").replace("#", "");
+
+        var concept = $(this).text();
+        $('.search-panel span#search_concept').text(concept);
+        $('.input-group #search_param').val(param);
+    });
+
     console.log('welcome');
 
     $("#department").prop("disabled", true);
-    $("#category").click(function () {
-        console.log($("#category option:selected").text());
-        if ($("#category option:selected").text() == "Human Resources") {
+    $("#category_type").click(function () {
+        console.log($("#category_type option:selected").text());
+        if ($("#category_type option:selected").text() == "Human Resources") {
             console.log('hr');
             $("#department").prop("disabled", false);
         } else {
@@ -559,49 +569,44 @@ $(document).ready(function () {
     });
 
     //Initialize tooltips
-    $('.nav-tabs > li a[title]').tooltip();
+    //     $('.nav-tabs > li a[title]').tooltip();
 
-    //Wizard
-    $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
+    //     //Wizard
+    //     $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
 
-        var $target = $(e.target);
+    //         var $target = $(e.target);
 
-        if ($target.parent().hasClass('disabled')) {
-            return false;
-        }
-    });
+    //         if ($target.parent().hasClass('disabled')) {
+    //             return false;
+    //         }
+    //     });
 
-    $(".next-step").click(function (e) {
+    //     $(".next-step").click(function (e) {
 
-        var $active = $('.wizard .nav-tabs li.active');
-        $active.next().removeClass('disabled');
-        nextTab($active);
-    });
-    $(".prev-step").click(function (e) {
+    //         var $active = $('.wizard .nav-tabs li.active');
+    //         $active.next().removeClass('disabled');
+    //         nextTab($active);
 
-        var $active = $('.wizard .nav-tabs li.active');
-        prevTab($active);
-    });
+    //     });
+    //     $(".prev-step").click(function (e) {
+
+    //         var $active = $('.wizard .nav-tabs li.active');
+    //         prevTab($active);
+
+    //     });    
 });
 
-function nextTab(elem) {
-    $(elem).next().find('a[data-toggle="tab"]').click();
-}
-function prevTab(elem) {
-    $(elem).prev().find('a[data-toggle="tab"]').click();
-}
+// function nextTab(elem) {
+//     $(elem).next().find('a[data-toggle="tab"]').click();
+// }
+// function prevTab(elem) {
+//     $(elem).prev().find('a[data-toggle="tab"]').click();
+// }
 
 function changeSelection() {
     var eID = document.getElementById("department");
     eID.options[0].selected = "true";
 }
-
-// $(".delete").off().click(function(){
-//     let id = $(this).data("id");
-
-//     $("#id").text(id);
-// });
-
 
 $("#effectdate").click(function () {
     $('#effectdate').datepicker({
@@ -622,6 +627,23 @@ $(".uploadfile").click(function () {
     var inputTwo = $(".name");
     inputTwo.val(inputOne.val());
 });
+
+$("#FormDeleteTime").submit(function (event) {
+    var x = confirm("Are you sure you want to delete?");
+    if (x) {
+        return true;
+    } else {
+
+        event.preventDefault();
+        return false;
+    }
+});
+
+// $(".delete").off().click(function(){
+//     let id = $(this).data("id");
+
+//     $("#id").text(id);
+// });
 
 /***/ }),
 /* 3 */
