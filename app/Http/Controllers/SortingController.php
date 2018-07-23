@@ -4,20 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Vendor;
+use App\Carbon;
 
 class SortingController extends Controller
 {
     public function index() 
     {
         $title ='Controllership Contract Repository';
-
-      
+    
         $query = request()->vendors;
       
         
         $vendor = Vendor::select('*');
         // $vendor_lists = $vendor->pluck('name','id');
         $vendor_lists = Vendor::select('name')->groupBy('name')->pluck('name','name');
+
+        
               
 
         
