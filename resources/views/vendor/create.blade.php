@@ -5,18 +5,19 @@
 		<section>
         {!! Form::open(['action' => 'VendorsController@store', 'method' => 'POST', 'enctype' =>'multipart/form-data']) !!}
         <div class="wizard">
+            {{-- tab icons --}}
             <div class="wizard-inner">
                 <div class="connecting-line"></div>
                 <ul class="nav nav-tabs" role="tablist">
-
                     <li role="presentation" class="active">
+                        
                         <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Step 1">
                             <span class="round-tab">
                                 <i class="glyphicon glyphicon-pencil"></i>
                             </span>
-                        </a>         
+                        </a>   
                     </li>
-                    <li role="presentation" class="disabled">
+                    <li role="presentation" class="disabled step2">
                         <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Step 2">
                             <span class="round-tab">
                                 <i class="glyphicon glyphicon-tags"></i>
@@ -30,7 +31,6 @@
                             </span>
                         </a>
                     </li>
-
                     <li role="presentation" class="disabled">
                         <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Complete">
                             <span class="round-tab">
@@ -40,7 +40,7 @@
                     </li>
                 </ul>
             </div>
-
+            {{-- all forms --}}
             <form role="form">
                 <div class="tab-content">
                     {{-- STEP 1 --}}
