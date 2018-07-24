@@ -56,4 +56,6 @@ Route::get('/storage/{filename}', function ($filename)
     return Image::make(storage_path('public/' . $filename))->response();
 });
 
+Route::get('profile', 'UserController@profile');
+Route::post('profile', 'UserController@update_avatar');
 

@@ -164,6 +164,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
     
 
         /*
@@ -232,6 +233,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Carbon' => 'Carbon\Carbon',
+        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 
