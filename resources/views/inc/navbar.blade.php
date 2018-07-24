@@ -1,3 +1,4 @@
+
 <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
             <div class="navbar-header">
@@ -11,8 +12,11 @@
                 </button>
 
                 <!-- Branding Image -->
+
+                
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{-- {{ config('app.name', 'Laravel') }} --}}
+                    <img src="https://corp.ingrammicro.com/getattachment/6838aceb-aa32-4075-9d75-7eb22f0d6bd5/logo-ingram-micro.png.aspx" style="height:100%;display:inline-block;"><span> Controllership</span> 
                 </a>
             </div>
 
