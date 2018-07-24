@@ -14,10 +14,8 @@
                             <span class="round-tab">
                                 <i class="glyphicon glyphicon-pencil"></i>
                             </span>
-                        </a>
-                        
+                        </a>         
                     </li>
-
                     <li role="presentation" class="disabled">
                         <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Step 2">
                             <span class="round-tab">
@@ -72,7 +70,7 @@
                                         <input type="email" name="email" id="email" class="form-control input-lg" placeholder="Email Address" tabindex="5">
                                 </div>
                                 <div class="form-group">
-                                        <input type="text" name="web_url" id="web_url" class="form-control input-lg" placeholder="Website Url" tabindex="6">
+                                <input type="text" name="web_url" id="web_url" class="form-control input-lg" placeholder="Website Url" tabindex="6">
                                                              
                         </div>
 
@@ -82,23 +80,19 @@
                         </ul> --}}
                     </div>
                     {{-- STEP 2 --}}
-                    <div class="tab-pane" role="tabpanel" id="step2">
-                        
+                    <div class="tab-pane col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3" role="tabpanel" id="step2">
                         {{-- Dropdown             --}}
-                        <div class="form-group contract col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+                        <div class="form-group">
                                 <h3>Contracts</h3>
                                 <select name="contract_type" id ="contract_type" data-filter="make" class="filter-make filter form-control input-lg" tabindex="7">
                                         <option value="0" disabled selected>Contract Type</option>
                                         @foreach($contract as $state)                                 
                                         <option>{{$state->value}}</option>     
                                         @endforeach
-
                                 </select>
                                 <br>
                         
-                            <div class="row" id="filter">
-                            <form>
-                                
+                            <div class="row" id="filter">   
                                 <div id ="cat" class="form-group col-sm-6 col-xs-6 cat">
                                         <select name="category_type" id ="category_type" data-filter="model" class="filter-model filter form-control input-lg" tabindex="8">
                                                 <option value="0" disabled selected>Category Type</option>
@@ -115,28 +109,25 @@
                                                 @endforeach
                                         </select>
                                 </div>
-                                
-                            </form>
-                        
-                </div>
+                            </div>
 
-                <div class="row">
-                        <div class='col-sm-6'>
-                        <label for="comment">Effective Date</label>
-                        <input name="effectivedate" type='text' class="form-control" id='effectdate' tabindex="10"/>
+                            <div class="row">
+                                    <div class='col-sm-6'>
+                                        <label for="comment">Effective Date</label>
+                                        <input name="effectivedate" type='text' class="form-control" id='effectdate' tabindex="10"/>
+                                    </div>
+                                    <div class='col-sm-6'>
+                                        <label for="comment">Expiration Date</label>
+                                        <input name="expirationdate" type='text' class="form-control" id='expiredate' tabindex="11"/>
+                                    </div>
+                            </div>
+                        
+                            {{-- <ul class="list-inline pull-right">
+                                <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+                                <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
+                            </ul> --}}
                         </div>
-                        <div class='col-sm-6'>
-                        <label for="comment">Expiration Date</label>
-                        <input name="expirationdate" type='text' class="form-control" id='expiredate' tabindex="11"/>
-                        </div>
-                </div>
-                <br>
-                        {{-- <ul class="list-inline pull-right">
-                            <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-                            <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
-                        </ul> --}}
                     </div>
-                </div>
                     {{-- STEP 3 --}}
                     <div class="tab-pane col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3" role="tabpanel" id="step3">
                         <h3>Terms</h3>
@@ -175,9 +166,7 @@
                         </ul> --}}
                     </div>
                     {{-- STEP 4 --}}
-                    <div class="tab-pane col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3" role="tabpanel" id="complete">
-                        
-                                               
+                    <div class="tab-pane col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3" role="tabpanel" id="complete">                                         
                             <div class="modal-body form-group">
                                     {{-- UPLOAD FILE --}}
                                     <h3>Upload Files</h3>
@@ -215,14 +204,12 @@
                                             <button type="submit" class="btn btn-lg btn-primary" id="js-upload-submit">Save Now</button>
 
                                           
-                                    </div>
-                                    
+                                    </div>    
                             </div>
                     </div>
-                    <div class="clearfix"></div>
-                </div>
-                {!! Form::close() !!}
+            </form>
         </div>
-    </section>
+        {!! Form::close() !!}
+        </section>
    </div>
-   @endsection
+@endsection
