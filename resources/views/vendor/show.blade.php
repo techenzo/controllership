@@ -5,7 +5,16 @@
 
 <div class="container">
 	<div class="row">
-		<h2>{{$vendor->name}}</h2>
+        
+        
+        
+        <div class="col-sm-4">
+                <label class="col-xs-4 control-label">Created by: </label>
+                <p class="form-control-static">{{$vendor->user['name']}}</p>             
+                <label class="col-xs-4 control-label">Created at:</label>
+                <p class="form-control-static">{{$vendor->created_at}}</p> 
+        </div>
+        <h2 align="center">{{$vendor->name}}</h2>
 	</div>
     <div class="row">
         <fieldset class="for-panel">
@@ -59,6 +68,7 @@
           </div>
         </fieldset>
     </div>
+    
 
 
     <hr>
@@ -81,12 +91,14 @@
     </div>
 
     <hr class="colorgraph">      
-    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-        <div class="col-xs-12 col-md-6"><a href="/home" class="btn btn-danger btn-block btn-lg" tabindex="1">Back</a></div>
-        <div class="col-xs-12 col-md-6"><input type="submit" value="Save" class="btn btn-primary btn-block btn-lg" tabindex="2"></div>
-    </div>
+    {{-- <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3"> --}}
+
+            <div class="col" align ="center"><a href="/home" class="btn btn-danger" tabindex="1">Back</a></div>
+        {{-- <div class="col-xs-12 col-md-6"><a href="/home" class="btn btn-danger btn-block btn-lg" tabindex="1">Back</a></div> --}}
+        {{-- <div class="col-xs-12 col-md-6"><input type="submit" value="Save" class="btn btn-primary btn-block btn-lg" tabindex="2"></div> --}}
+    {{-- </div> --}}
     
-</div>
+    </div>
 
 
 </div>

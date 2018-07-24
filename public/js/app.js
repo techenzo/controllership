@@ -568,6 +568,34 @@ $(document).ready(function () {
         }
     });
 
+    //   $("#FormDeleteTime").submit(function (event) {
+    //     var x = !confirm("Are you sure you want to delete?");
+    //        if (x) {
+
+    //         location.reload();
+    //         // event.preventDefault();
+    //            return false;
+
+    //        }
+    //        else {
+
+
+    //            return true;
+    //        }
+
+    //    });
+
+    $("#FormDeleteTime").live("click", function (event) {
+        event.stopPropagation();
+        if (confirm("Do you want to delete?")) {
+            this.click;
+            return true;
+        } else {
+            // alert("Cancel");
+        }
+        event.preventDefault();
+    });
+
     //Initialize tooltips
     //     $('.nav-tabs > li a[title]').tooltip();
 
@@ -626,17 +654,6 @@ $(".uploadfile").click(function () {
     var inputOne = $("#vendor_name");
     var inputTwo = $(".name");
     inputTwo.val(inputOne.val());
-});
-
-$("#FormDeleteTime").submit(function (event) {
-    var x = confirm("Are you sure you want to delete?");
-    if (x) {
-        return true;
-    } else {
-
-        event.preventDefault();
-        return false;
-    }
 });
 
 // $(".delete").off().click(function(){
