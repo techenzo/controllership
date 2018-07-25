@@ -27,7 +27,6 @@ class CreateVendorsTable extends Migration
             $table->date('effectivedate')->nullable();
             $table->date('expirationdate')->nullable();
             $table->unsignedInteger('status_id')->nullable();
-            $table->unsignedInteger('user_id');
             $table->longText('termination')->nullable();
             $table->longText('payment')->nullable();
             $table->longText('spend')->nullable();
