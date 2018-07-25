@@ -58,4 +58,5 @@ Route::get('/storage/{filename}', function ($filename)
 
 Route::get('profile', 'UserController@profile');
 Route::post('profile', 'UserController@update_avatar');
+Route::get('vendors/{id}/profile', 'UserController@profile');
 

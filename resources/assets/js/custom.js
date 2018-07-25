@@ -1,6 +1,9 @@
 
 $(document).ready(function () {
 
+    $(".text-upload").click(function(){ $("#inpupload").trigger("click"); });
+    $("#inpupload").change(function(){ $("#frmupload").submit(); });
+
     console.log('Test Enzo');
     // search with filters
     $('.search-panel .dropdown-menu').find('a').click(function(e) {
@@ -14,40 +17,49 @@ $(document).ready(function () {
 
     // Dropdown for contract type, category and department
     $("#department").prop("disabled", true);
-        $("#category_type").click(function() {   
-            console.log($("#category_type option:selected" ).text());
-            if($("#category_type option:selected" ).text() == "Human Resources"){      
-                console.log('Human Resources');
-                $("#department").prop("disabled", false);
-            }
-            else{
-                // cannot select the not applicable
-                changeSelection();
-                $("#department").prop("disabled", true);
-                console.log('Others Category');
-            }
-        });  
-    });     
-     //Delete Alert
-    $("#FormDeleteTime").live("click",function(event){
-        event.stopPropagation();
-        if(confirm("Do you want to delete?")) {
-         this.click;
-            return true;
+    $("#category_type").click(function() {   
+        console.log($("#category_type option:selected" ).text());
+        if($("#category_type option:selected" ).text() == "Human Resources"){      
+            console.log('Human Resources');
+            $("#department").prop("disabled", false);
         }
-        else
-        {
-            // alert("Cancel");
-        }       
-        event.preventDefault(); 
+        else{
+            // cannot select the not applicable
+            changeSelection();
+            $("#department").prop("disabled", true);
+            console.log('Others Category');
+        }
+    });  
+
+       //Delete Alert
+    $("#FormDeleteTime").live("click",function(event){
+    event.stopPropagation();
+    if(confirm("Do you want to delete?")) {
+        this.click;
+        return true;
+    }
+    else
+    {
+        // alert("Cancel");
+    }       
+    event.preventDefault(); 
     });
 
+
+
+
+ });    
+    
+
+    
 
 
     function changeSelection(){
         var eID = document.getElementById("department");
         eID.options[0].selected="true";
         }
+
+
                 
                 
     // Date picker for effective date            
@@ -72,6 +84,13 @@ $(document).ready(function () {
         var inputTwo = $(".name");
         inputTwo.val(inputOne.val());
     });
+
+  
+
+   
+        
+   
+
 
             
             

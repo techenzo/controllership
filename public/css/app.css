@@ -8505,3 +8505,35 @@ span.round-tab:hover {
   }
 }
 
+#frmupload {
+  display: none;
+}
+
+.middle {
+  -webkit-transition: .5s ease;
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.container:hover .image {
+  opacity: 0.3;
+}
+
+.container:hover .middle {
+  opacity: 1;
+}
+
+.text-upload {
+  color: black;
+  font-size: 16px;
+  margin-right: 600px;
+  cursor: pointer;
+}
+
