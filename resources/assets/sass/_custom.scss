@@ -160,6 +160,7 @@ span.round-tab:hover {
     }
 }
 
+//avatar upload and hover
 #frmupload{
     display:none;
 }
@@ -204,6 +205,17 @@ span.round-tab:hover {
   margin-right: 600px;
   cursor: pointer;
 //   padding: 16px 32px;
+}
+
+.navbar-inverse{
+    background-color: #2375BB;
+}
+#systemname:hover, #username{
+    color: black;
+}
+#systemname, #username{
+    padding-top:50px;
+    color: white;
 }
 
  

@@ -1,5 +1,5 @@
 
-<nav class="navbar navbar-default navbar-static-top">
+<nav class="navbar navbar-inverse navbar-static-top">
         <div class="container">
             <div class="navbar-header">
 
@@ -16,7 +16,7 @@
                 
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{-- {{ config('app.name', 'Laravel') }} --}}
-                    <img src="https://corp.ingrammicro.com/getattachment/6838aceb-aa32-4075-9d75-7eb22f0d6bd5/logo-ingram-micro.png.aspx" style="height:100%;display:inline-block;"><span> Controllership</span> 
+                    <img src="/uploads/logo/ingram-black.png" style="height:100%;display:inline-block;"><span id="systemname"> Controllership</span> 
                 </a>
             </div>
 
@@ -35,8 +35,8 @@
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="position:relative; padding-left:50px;">
-                                    <img src ="/uploads/avatars/{{Auth::user()->avatar}}" style="width:32px; height:32px; position:absolute; top:10px; left:10px; border-radius:50%;">
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                                <img src ="/uploads/avatars/{{Auth::user()->avatar}}" style="width:32px; height:32px; position:absolute; top:10px; left:10px; border-radius:50%;">
+                                <span id="username">{{ Auth::user()->name }}</span> <span class="caret"></span>
                             </a>
 
                             <ul class="dropdown-menu" role="menu">

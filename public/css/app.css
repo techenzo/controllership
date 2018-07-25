@@ -8537,3 +8537,18 @@ span.round-tab:hover {
   cursor: pointer;
 }
 
+.navbar-inverse {
+  background-color: #2375BB;
+}
+
+#systemname:hover,
+#username {
+  color: black;
+}
+
+#systemname,
+#username {
+  padding-top: 50px;
+  color: white;
+}
+
