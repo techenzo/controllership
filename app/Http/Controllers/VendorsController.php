@@ -185,10 +185,14 @@ class VendorsController extends Controller
         //Get vendor name
         $vendorname = Vendor::select('name')->where('id', $id)->first();
         $name =  $vendor->vendor;
+        
+
         //Get item id
-        $id = Item::select('id')->where('name', $name)->get();
+        $id = Item::select('id')->where('name', $vendor->name)->get();
         //Get file name
-        $files = Itemdetails::select('filename')->wherein('item_id', $id)->pluck('filename');
+        $files = Itemdetails::select('filename')
+                                    ->wherein('item_id', $id)
+                                    ->pluck('filename', 'filename');
        
       
  
@@ -218,10 +222,10 @@ class VendorsController extends Controller
         //Get item id
          $id = Item::select('id')->where('name', $vendor->name)->get();
         //Get file name
-        $files = Itemdetails::select('filename')->wherein('item_id', $id)->pluck('filename');
-       
-      
- 
+         $files = Itemdetails::select('filename')
+                                    ->wherein('item_id', $id)
+                                    ->pluck('filename', 'filename');
+
         return view('vendor.edit', compact('vendor', 'files'));
     }
 

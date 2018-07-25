@@ -68,6 +68,24 @@
           </div>
         </fieldset>
     </div>
+
+    <div class="row">
+        <fieldset class="for-panel">
+                <legend>Uploaded Files</legend>
+                {{-- files can be show --}}
+                <ul>    
+                    @foreach ($files as $filename)            
+                    <li>    
+                    <a href="/storage/{!! urldecode(str_replace('public/', '', $filename)) !!}">
+                            <?=str_replace('public/', ' ', $filename)?>
+                    </a>
+                    </li>
+                    @endforeach
+                </ul>
+        </fieldset>
+    </div>
+
+    
     
 
 

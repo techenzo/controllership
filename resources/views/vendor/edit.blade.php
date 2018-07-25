@@ -102,20 +102,16 @@
                                 <textarea class="form-control" tabindex="15" rows="5" name = "penalty" id="penalty" >{{ $vendor->penalty}}
                                 </textarea>
                         </div>
-                        {{-- files can be download --}}
+                        
+                        {{-- files can be show --}}
                         <ul>    
-                        @foreach ($files as $filename)     
-                             
-                        <li>    
-
-                   
-                        <a href="/storage/{!! urldecode(str_replace('public/', '', $filename)) !!}">
-                                <?=str_replace('public/', ' ', $filename)?>
-                                
-                                </a>
-                        </li>
-                        @endforeach
+                                @foreach ($files as $filename)     
+                                <li><a href="/storage/{!! urldecode(str_replace('public/', '', $filename)) !!}">
+                                        <?=str_replace('public/', ' ', $filename)?>
+                                </a></li>
+                                @endforeach
                         </ul>
+
                         {{-- buttons --}}
                         <hr class="colorgraph">      
                         <div class="row">
