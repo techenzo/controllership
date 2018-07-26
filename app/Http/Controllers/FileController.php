@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Vendor;
+use App\ItemDetails;
+use App\File;
 
 class FileController extends Controller
 {
@@ -34,6 +36,31 @@ class FileController extends Controller
                 $sheet->fromArray($details);
             });
         })->download($type);
-    }      
+    } 
+    
+    public function show(Request $request, $filename)
+    {
+        
+        
+       
+    }
+
+    public function deletefile(Request $request, $id)
+    {
+        
+        
+        $vendor = ItemDetails::find($id);
+        $vendor->status_id = '0';
+        $vendor->save();
+
+        return redirect()->back()->with('success', 'The file was deleted!');
+    }
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    
 
 }

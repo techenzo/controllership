@@ -8542,13 +8542,16 @@ span.round-tab:hover {
 }
 
 #systemname:hover,
-#username {
+#username,
+#login,
+#register {
   color: black;
 }
 
 #systemname,
-#username {
-  padding-top: 50px;
+#username,
+#login,
+#register {
   color: white;
 }
 

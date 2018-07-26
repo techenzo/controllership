@@ -18,12 +18,6 @@ class SortingController extends Controller
         $vendor = Vendor::select('*');
         // $vendor_lists = $vendor->pluck('name','id');
         $vendor_lists = Vendor::select('name')->groupBy('name')->pluck('name','name');
-
-        
-              
-
-        
-
         $vendors = $query
                     ? $vendor->where('name', $query)->where('status_id', 1)->orderBy('expirationdate', 'ASC')->paginate(10)
                     : $vendor->where('status_id', 1)->orderBy('expirationdate', 'ASC')->paginate(10);

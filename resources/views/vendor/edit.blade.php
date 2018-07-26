@@ -106,10 +106,28 @@
                         {{-- files can be show --}}
                         <ul>    
                                 @foreach ($files as $filename)     
-                                <li><a href="/storage/{!! urldecode(str_replace('public/', '', $filename)) !!}">
-                                        <?=str_replace('public/', ' ', $filename)?>
-                                </a></li>
+                               
+                                <li class="{{$filename->id}}">
+                                                
+                                                <span data-placement="top" data-toggle="tooltip" title="delete">
+                                                {!!Form::open(['action' => ['FileController@deletefile', $filename->id], 'method' => 'PUT', 'id' => 'FileDeleteTime'])!!}
+                                                
+                                                {{-- <a href="file"> --}}
+                                                <a href="{!! route('switch', ['id'=>$filename->id]) !!}"        
+                                                <span id = "" class="glyphicon glyphicon-trash"></span>
+                                                </a>
+                                                
+                                                </span>&nbsp;
+                                                {!!Form::close()!!}
+                                                <a href="/storage/{!! urldecode(str_replace('public/', '', $filename->filename)) !!}">
+                                                <?=str_replace('public/', ' ', $filename->filename)?>
+                                               
+                                                </a>
+                                        {{-- <p>{{$filename->id}}</p> --}}
+                                                
+                                </li>
                                 @endforeach
+                              
                         </ul>
 
                         {{-- buttons --}}
