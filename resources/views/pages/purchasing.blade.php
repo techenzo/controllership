@@ -78,6 +78,7 @@
                                 {{-- <th>Files</th> --}}
                                 {{-- <th>Edit</th> --}}
                                 {{-- <th>Delete</th> --}}
+                                <th>View</th>
                             </thead>
                             <tbody>
                             @foreach ($vendors as $value)
@@ -104,6 +105,15 @@
                                 <td>{{ $value->effectivedate}}</td>
                                 <td>{{ $value->expirationdate}}</td>
                                 <td>{{ $value->user['name']}}</td>
+                                <td>
+                                    <a href="vendor/{{$value->id}}">
+                                    <p data-placement="top" data-toggle="tooltip" title="Edit">
+                                        <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="" >
+                                            <span class="glyphicon glyphicon-eye-open"></span>
+                                        </button>
+                                    </p>
+                                    </a>
+                                </td>
                                 {{-- <td><a href="vendor/{{$value->vendor_id}}/files">View</a></td> --}}
     
                                 {{-- <td>
