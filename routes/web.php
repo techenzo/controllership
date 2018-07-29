@@ -27,9 +27,9 @@
 // });
 
 
-Route::get('/', 'PagesController@index');
+Route::get('/purchasing', 'PagesController@index');
 Route::get('/finance', 'PagesController@finance');
-Route::get('/purchasing', 'SortingController@index');
+Route::get('/', 'SortingController@index');
 Route::resource('vendor', 'VendorsController');
 Route::resource('search', 'SortingController');
 Route::get('vendor/{id}/file', 'FileController@deletefile');
@@ -50,9 +50,9 @@ Route::get('import-export-csv-excel',array('as'=>'excel.import','uses'=>'FileCon
 Route::post('import-csv-excel',array('as'=>'import-csv-excel','uses'=>'FileController@importFileIntoDB'));
 Route::get('download-excel-file/{type}', array('as'=>'excel-file','uses'=>'FileController@downloadExcelFile'));
 
-$router->get('/switchinfo/{id}',[
+$router->get('/filename/{id}',[
     'uses' => 'FileController@deletefile',
-    'as'   => 'switch'
+    'as'   => 'file'
 ]);
 
 

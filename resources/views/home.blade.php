@@ -20,7 +20,7 @@
                         <div class="row">
                             <div class="col"> 
                                 @if(count($vendors)  > 0)
-                                <h4>Vendors Details</h4>  
+                                <h4>&nbsp;Vendors Details</h4>  
                                 <table class="table table-striped">
                                     <thead>
                                             <th>ID</th>

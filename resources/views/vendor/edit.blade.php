@@ -109,12 +109,12 @@
                                
                                 <li class="{{$filename->id}}">
                                                 
-                                                <span data-placement="top" data-toggle="tooltip" title="delete">
-                                                {!!Form::open(['action' => ['FileController@deletefile', $filename->id], 'method' => 'PUT', 'id' => 'FileDeleteTime'])!!}
+                                                
+                                                {{-- {!!Form::open(['action' => ['FileController@deletefile', $filename->id], 'method' => 'PUT', 'id' => 'FileDeleteTime'])!!} --}}
                                                 
                                                 {{-- <a href="file"> --}}
-                                                <a href="{!! route('switch', ['id'=>$filename->id]) !!}"        
-                                                <span id = "" class="glyphicon glyphicon-trash"></span>
+                                                <a href="{!! route('file', ['id'=>$filename->id]) !!}"        
+                                                <span id = "" title = "Delete" class="btn btn-danger btn-xs glyphicon glyphicon-trash"></span>
                                                 </a>
                                                 
                                                 </span>&nbsp;
@@ -129,6 +129,38 @@
                                 @endforeach
                               
                         </ul>
+
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        Add File
+                        </button>
+              
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Upload files</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>
+                                <div class="modal-body">
+                                        {{-- Content --}}
+                                        {!! Form::open(['action' => 'VendorsController@store', 'method' => 'POST', 'enctype' =>'multipart/form-data']) !!}
+                                        <span class="btn btn-default btn-file">   
+                                                         
+                                                <input type="file" name="photos[]" id="js-upload-files" multiple>
+                                        </span>
+                                        {!! Form::close() !!}
+                                </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" id="js-upload-submit">Save changes</button>
+                                </div>
+                                </div>
+                                </div>
+                        </div>
 
                         {{-- buttons --}}
                         <hr class="colorgraph">      
