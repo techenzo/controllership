@@ -37,7 +37,8 @@ class PagesController extends Controller
         $control = $user->access;
         $title ='Controllership Contract Repository';
         if($control == 0){
-            return response(redirect(url('/')), 404);   
+            // return response(redirect(url('/')), 404);   
+            return view('error.404');
         }
         $title ='Controllership Contract Repository';
         $query = request()->vendors;

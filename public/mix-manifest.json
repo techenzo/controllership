@@ -1,7 +1,7 @@
 {
     "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css",
     "/js/jquery.min.js": "/js/jquery.min.js",
     "/js/jquery-ui.min.js": "/js/jquery-ui.min.js",
-    "/js/custom.js": "/js/custom.js"
+    "/js/custom.js": "/js/custom.js",
+    "/css/app.css": "/css/app.css"
 }

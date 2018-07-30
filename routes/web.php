@@ -66,3 +66,5 @@ Route::post('profile', 'UserController@update_avatar');
 Route::get('vendors/{id}/profile', 'UserController@profile');
 
 
+
+
