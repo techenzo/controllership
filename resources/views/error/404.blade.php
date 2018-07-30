@@ -1,4 +1,4 @@
-<div class="overlay" ></div>
+<div class="overlay" ~></div>
 <div class="terminal" align="center" style="margin-top:200px; " >
   <h1>Error <span class="errorcode">404</span></h1>
   <p class="output" style="color:blue;">Unauthorized person!</p>
