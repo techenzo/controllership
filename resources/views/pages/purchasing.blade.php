@@ -78,7 +78,9 @@
                                 {{-- <th>Files</th> --}}
                                 {{-- <th>Edit</th> --}}
                                 {{-- <th>Delete</th> --}}
+                                @if(!Auth::guest())
                                 <th>View</th>
+                                @endif
                             </thead>
                             <tbody>
                             @foreach ($vendors as $value)
@@ -93,6 +95,8 @@
                                 echo $num_padded;
                                 ?>
                                 </td>
+
+                              
                                 <td>{{ $value->name}}</td>
                                 <td>{{ $value->first_name}}</td>
                                 <td>{{ $value->last_name}}</td>
@@ -105,7 +109,9 @@
                                 <td>{{ $value->effectivedate}}</td>
                                 <td>{{ $value->expirationdate}}</td>
                                 <td>{{ $value->user['name']}}</td>
+                                @if(!Auth::guest())
                                 <td>
+                                    
                                     <a href="vendor/{{$value->id}}">
                                     <p data-placement="top" data-toggle="tooltip" title="Edit">
                                         <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="" >
@@ -114,6 +120,7 @@
                                     </p>
                                     </a>
                                 </td>
+                                @endif
                                 {{-- <td><a href="vendor/{{$value->vendor_id}}/files">View</a></td> --}}
     
                                 {{-- <td>

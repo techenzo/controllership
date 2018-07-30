@@ -27,9 +27,9 @@
 // });
 
 
-Route::get('/purchasing', 'PagesController@index');
+Route::get('/', 'PagesController@index');
 Route::get('/finance', 'PagesController@finance');
-Route::get('/', 'SortingController@index');
+Route::get('/purchasing', 'SortingController@index');
 Route::resource('vendor', 'VendorsController');
 Route::resource('search', 'SortingController');
 Route::get('vendor/{id}/file', 'FileController@deletefile');

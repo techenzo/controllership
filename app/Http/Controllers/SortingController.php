@@ -8,6 +8,7 @@ use App\Carbon;
 
 class SortingController extends Controller
 {
+
     public function index() 
     {
         $title ='Controllership Contract Repository';

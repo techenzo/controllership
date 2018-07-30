@@ -31,6 +31,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Vendor');
     }
 
+    public function access(){
+        return $this->hasMany('App\Access');
+    }
+
    
 }
 
