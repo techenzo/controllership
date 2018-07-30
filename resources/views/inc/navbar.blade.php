@@ -1,5 +1,5 @@
 
-<nav class="navbar navbar-inverse navbar-static-top">
+<nav class="navbar navbar-default navbar-static-top">
         <div class="container">
             <div class="navbar-header">
 
@@ -16,7 +16,7 @@
                 
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{-- {{ config('app.name', 'Laravel') }} --}}
-                    <img src="/uploads/logo/ingram-black.png" style="height:100%;display:inline-block;"><span id="systemname"> Controllership</span> 
+                    <img src="/uploads/logo/ingram-blue.png" style="height:100%;display:inline-block;"><span id="systemname"> Controllership</span> 
                 </a>
             </div>
 
