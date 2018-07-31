@@ -9,7 +9,6 @@
             {{-- {!! Form::open(['route' => ['vendor.update', $vendor->id], 'method' => 'POST', 'files' => true ]) !!}  --}}
             {{-- {!! Form::open(['route' => ['vendor.update', $vendor->id], 'method' => 'POST', 'files' => true ]) !!}  --}}
             {!! Form::open(['action' => ['VendorsController@update', $vendor->id], 'method' => 'PUT', 'enctype' =>'multipart/form-data']) !!}
-           
             <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
                 <form role="form">
                     <h2>Vendor Contact Info</h2>
@@ -65,6 +64,7 @@
                                 </div>        
                                 </form>
                         </div> 
+
                         {{-- datepicker --}}
                         <div class="row">
                                 <div class='col-sm-6'>
@@ -78,7 +78,7 @@
                         </div><br>
 
                         
-
+                        {{-- text area --}}
                         <div class="form-group">      
                                 <label for="comment">Terms of Termination</label>
                                 <textarea class="form-control" tabindex="12" rows="5" name ="termination" id="termination" >{{ $vendor->termination}} 
@@ -103,31 +103,20 @@
                                 </textarea>
                         </div>
                         
-                        {{-- files can be show --}}
+                        {{-- files can be view --}}
                         <ul>    
                                 @foreach ($files as $filename)     
-                               
                                 <li class="{{$filename->id}}">
-                                                
-                                                
-                                                {{-- {!!Form::open(['action' => ['FileController@deletefile', $filename->id], 'method' => 'PUT', 'id' => 'FileDeleteTime'])!!} --}}
-                                                
-                                                {{-- <a href="file"> --}}
+
                                                 <a href="{!! route('file', ['id'=>$filename->id]) !!}"        
                                                 <span id = "" title = "Delete" class="btn btn-danger btn-xs glyphicon glyphicon-trash"></span>
-                                                </a>
-                                                
+                                                </a>     
                                                 </span>&nbsp;
-                                                {!!Form::close()!!}
                                                 <a href="/storage/{!! urldecode(str_replace('public/', '', $filename->filename)) !!}">
                                                 <?=str_replace('public/', ' ', $filename->filename)?>
-                                               
                                                 </a>
-                                        {{-- <p>{{$filename->id}}</p> --}}
-                                                
                                 </li>
-                                @endforeach
-                              
+                                @endforeach  
                         </ul>
 
                         {{-- <center>
@@ -152,11 +141,9 @@
                                 </div>
                                 <div class="modal-body">
                                         {{-- Content --}}
-                                        
                                         <center><span class="btn btn-default btn-file">           
                                                 <input type="file" name="photos[]" id="js-upload-files" multiple>
                                         </span></center>
-                                    
                                 </div>
                                 <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
