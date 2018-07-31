@@ -130,6 +130,11 @@
                               
                         </ul>
 
+                        {{-- <center>
+                        <span class="btn btn-default btn-file">                                                          
+                                <input type="file" name="photos[]" id="js-upload-files" multiple>
+                        </span> --}}
+
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                         Add File
@@ -147,16 +152,15 @@
                                 </div>
                                 <div class="modal-body">
                                         {{-- Content --}}
-                                        {!! Form::open(['action' => 'VendorsController@store', 'method' => 'POST', 'enctype' =>'multipart/form-data']) !!}
-                                        <span class="btn btn-default btn-file">   
-                                                         
+                                        
+                                        <center><span class="btn btn-default btn-file">           
                                                 <input type="file" name="photos[]" id="js-upload-files" multiple>
-                                        </span>
-                                        {!! Form::close() !!}
+                                        </span></center>
+                                    
                                 </div>
                                 <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary" id="js-upload-submit">Save changes</button>
+                                {{-- <button type="button" class="btn btn-primary" id="js-upload-submit">Save changes</button> --}}
                                 </div>
                                 </div>
                                 </div>
