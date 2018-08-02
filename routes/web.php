@@ -65,6 +65,6 @@ Route::get('profile', 'UserController@profile');
 Route::post('profile', 'UserController@update_avatar');
 Route::get('vendors/{id}/profile', 'UserController@profile');
 
+Route::resource('crrs', 'CrrsController');
 
-
-
+Route::get('generate-pdf', 'PdfviewController@pdfview')->name('generate-pdf');
