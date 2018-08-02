@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Contract extends Model
 {
-    protected $table = 'tbl_contract';
+    protected $table = 'contracts';
 
     //Primary Key
     public $primaryKey = 'id';

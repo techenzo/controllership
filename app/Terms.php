@@ -8,10 +8,10 @@ class Terms extends Model
 {
     ////Table Name
 
-    protected $table = 'tbl_terms';
+    protected $table = 'terms';
 
     //Primary Key
-    public $primaryKey = 'terms_id';
+    public $primaryKey = 'id';
 
 
     //Timestamps

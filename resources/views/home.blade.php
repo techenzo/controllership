@@ -20,7 +20,7 @@
                         <div class="row">
                             <div class="col"> 
                                 @if(count($vendors)  > 0)
-                                <h4>Vendors Details</h4>  
+                                <h4>&nbsp;Vendors Details</h4>  
                                 <table class="table table-striped">
                                     <thead>
                                             <th>ID</th>
@@ -29,28 +29,51 @@
                                             <th>Last Name</th>
                 
                                             <th>View</th>
+                                            <th>Edit</th>
+                                            <th>Delete</th>
                                     </thead>
                                     @foreach($vendors as $value)
                                     <tr>    <td>
                                             {{$value->code}}
                                             <?php
-                                            $num = $value->vendor_id;
+                                            $num = $value->id;
                                             $num_padded = sprintf("%06d", $num);
                                             echo $num_padded;
                                             ?>
                                             </td>
-                                            <td>{{ $value->vendor}}</td>
-                                            <td>{{ $value->firstname}}</td>
-                                            <td>{{ $value->lastname}}</td>
+                                            <td>{{ $value->name}}</td>
+                                            <td>{{ $value->first_name}}</td>
+                                            <td>{{ $value->last_name}}</td>
                 
                                             <td>
-                                                <a href="vendor/{{$value->vendor_id}}">
+                                                <a href="vendor/{{$value->id}}">
                                                 <p data-placement="top" data-toggle="tooltip" title="Edit">
                                                     <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="" >
                                                         <span class="glyphicon glyphicon-eye-open"></span>
                                                     </button>
                                                 </p>
                                                 </a>
+                                            </td>
+
+                                            <td>
+                                                <a href="vendor/{{$value->id}}/edit">
+                                                <p data-placement="top" data-toggle="tooltip" title="Edit">
+                                                    <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="" >
+                                                        <span class="glyphicon glyphicon-pencil"></span>
+                                                    </button>
+                                                </p>
+                                                </a>
+                                            </td>
+
+                                            <td>
+                                                {!!Form::open(['action' => ['DeleteStatusController@update', $value->id], 'method' => 'PUT', 'id' => 'FormDeleteTime'])!!}
+                                                <p data-placement="top" data-toggle="tooltip" title="Edit">
+                                                    <button class="btn btn-danger btn-xs" data-title="Edit" data-toggle="modal" data-target="" >
+                                                        <span class="glyphicon glyphicon-trash"></span>
+                                                    </button>
+                                                </p>
+                                                </a>
+                                                {!!Form::close()!!}
                                             </td>
                                     </tr>
                                     @endforeach
@@ -69,7 +92,7 @@
                                 <br>
 
                                 <div align="center">
-                                    <a href="purchasing/create" >
+                                    <a href="vendor/create" >
                                     <button class="btn btn-add btn-primary"><span class="glyphicon glyphicon-plus"> New Vendor</span></button>
                                     </a>   
                                 </div>

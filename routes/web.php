@@ -29,13 +29,15 @@
 
 Route::get('/', 'PagesController@index');
 Route::get('/finance', 'PagesController@finance');
-Route::get('/purchasing', 'PagesController@purchasing');
+Route::get('/purchasing', 'SortingController@index');
 Route::resource('vendor', 'VendorsController');
+Route::resource('search', 'SortingController');
+Route::get('vendor/{id}/file', 'FileController@deletefile');
 Route::get('/purchasing/create', 'VendorsController@addvendor');
 Route::get('/purchasing/search', 'VendorsController@searchvendor');
 
 
-
+Route::resource('status', 'DeleteStatusController');
 Route::get('/multiuploads', 'VendorsController@uploadForm');
 
 Route::post('/upload', 'VendorsController@uploadSubmit');
@@ -44,13 +46,25 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-
 Route::get('import-export-csv-excel',array('as'=>'excel.import','uses'=>'FileController@importExportExcelORCSV'));
 Route::post('import-csv-excel',array('as'=>'import-csv-excel','uses'=>'FileController@importFileIntoDB'));
 Route::get('download-excel-file/{type}', array('as'=>'excel-file','uses'=>'FileController@downloadExcelFile'));
+
+$router->get('/filename/{id}',[
+    'uses' => 'FileController@deletefile',
+    'as'   => 'file'
+]);
 
 
 Route::get('/storage/{filename}', function ($filename)
 {
     return Image::make(storage_path('public/' . $filename))->response();
 });
+
+Route::get('profile', 'UserController@profile');
+Route::post('profile', 'UserController@update_avatar');
+Route::get('vendors/{id}/profile', 'UserController@profile');
+
+Route::resource('crrs', 'CrrsController');
+
+Route::get('generate-pdf', 'PdfviewController@pdfview')->name('generate-pdf');

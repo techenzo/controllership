@@ -28,7 +28,7 @@ class HomeController extends Controller
         $user_id = auth()->user()->id;
         
         //Search the user details
-        $userid = Vendor::WHERE('user_id', $user_id)->paginate(5);
+        $userid = Vendor::WHERE('user_id', $user_id)->where('status_id', '1')->paginate(5);
         return view('home')->with('vendors',$userid);
     }
 }

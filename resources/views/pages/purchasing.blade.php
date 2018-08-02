@@ -1,125 +1,166 @@
+
 @extends('layouts.app')
 
 @section('content')
 
+
+
     <h1 class="display-4">Controllership Contract Repository</h1>
     <div class="container">
  
-        {{-- <div class="row">
-            <div class="col-md-12">
-                <form action="{{action('VendorsController@searchvendor')}}" method="get">
-                <div class="input-group" id="adv-search">
-                <input type="text" class="form-control" name ="s" placeholder="Search Vendors" value="{{isset($s) ? $s : ''}}"/>
-                    <div class="input-group-btn">
-                        <div class="col btn-group" role="group">
-                            <div class="dropdown dropdown-lg">
-                      
-                            <btton type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>&emsp;
-                            </form>
-                           
-                            </div> 
-                        </div> 
+        {{-- search panel with filters --}}
+        <div class="container">
+            <div class="row">    
+                
+                <div class="col-xs-8 col-xs-offset-2">
+                   
+                    
+                    <div align ="right" class="input-group">
+                        <div class="input-group-btn search-panel">
+
+
+                                {!! Form::open(['url' => 'purchasing', 'method' => 'get'])!!}
+                                    {{ Form::select('vendors', $vendor_lists, null, ['class' => 'btn btn-default dropdown-toggle', 'placeholder' => 'Choose a vendor...']) }}
+                                    {{ Form::button('<i class="glyphicon glyphicon-search"></i>', array('type' => 'submit', 'class' => 'btn btn-default'))}}
+                                {!! Form::close() !!}
+                            {{-- <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                <span id="search_concept">Filter by Vendorname</span> <span class="caret"></span>
+                            </button> --}}
+
+                            
+                            
+                            {{-- <ul class="dropdown-menu" role="menu">
+                                @foreach ($listvendorname as $name)
+                                <li><a href="{{action('SortingController@show', '$name->name')}}">{{$name->name}}</a></li>
+                                @endforeach
+                                <li class="divider"></li>
+                                <li><a href="#all">Anything</a></li>
+                            </ul> --}}
+                            
+                        </div>
+                        {{-- <input type="hidden" name="search_param" value="all" id="search_param">         
+                        <input type="text" class="form-control" name="x" placeholder="Search term...">
+                        <span class="">
+                            <a href="{{action('SortingController@index')}}/{{$name->name}}">
+                            <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                            </a>
+                            
+                        </span> --}}
                     </div>
                 </div>
                 
-            </div>        
-        </div> --}}
-        {{-- <div align="right">
-            <a href="purchasing/create" >
-            <button class="btn btn-add btn-primary"><span class="glyphicon glyphicon-plus"> Add Vendor</span></button>
-            </a>   
-        </div> --}}
-        
+            </div>
+        </div>
+        <br>
+
+            
         {{-- data table --}}
         <div class="row">
-            <div class="col">
-                <h4>Vendors Details</h4>
-                <div class="table-responsive">    
-                    <table id="mytable" class="table table-bordred table-striped"> 
-                        <thead>  
-                            {{-- <th><input type="checkbox" id="checkall" /></th> --}}
-                            <th>ID</th>
-                            <th>Vedor Name</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Address</th>
-                            <th>Email</th>
-                            <th>Web Url</th>
-                            {{-- <th>Contract Type</th>
-                            <th>Category Type</th>
-                            <th>Department</th> --}}
-                            <th>Effective Date</th>
-                            <th>Expiration Date</th>
-                            <th>Created by</th>
-                            {{-- <th>Files</th> --}}
-                            {{-- <th>Edit</th> --}}
-                            {{-- <th>Delete</th> --}}
-                        </thead>
-                        <tbody>
-                        @foreach ($vendors as $value)
-                        <tr>  
+                <div class="col">
+                    {{-- <h4>Vendors Details</h4> --}}
+                    <div class="table-responsive">    
+                        <table id="mytable" class="table table-bordred table-striped"> 
+                            <thead>  
+                                {{-- <th><input type="checkbox" id="checkall" /></th> --}}
+                                <th>ID</th>
+                                <th>Vedor Name</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Address</th>
+                                <th>Email</th>
+                                <th>Web Url</th>
+                                {{-- <th>Contract Type</th>
+                                <th>Category Type</th>
+                                <th>Department</th> --}}
+                                <th>Effective Date</th>
+                                <th>Expiration Date</th>
+                                <th>Created by</th>
+                                {{-- <th>Files</th> --}}
+                                {{-- <th>Edit</th> --}}
+                                {{-- <th>Delete</th> --}}
+                                @if(!Auth::guest())
+                                <th>View</th>
+                                @endif
+                            </thead>
+                            <tbody>
+                            @foreach ($vendors as $value)
+                            <tr>  
+    
+                                {{-- this will display only the concatination of contract code and the vendor id --}}
+                                <td>   
+                                {{$value->code}}
+                                <?php
+                                $num = $value->id;
+                                $num_padded = sprintf("%06d", $num);
+                                echo $num_padded;
+                                ?>
+                                </td>
 
-                            {{-- this will display only the concatination of contract code and the vendor id --}}
-                            <td>   
-                            {{$value->code}}
-                            <?php
-                            $num = $value->vendor_id;
-                            $num_padded = sprintf("%06d", $num);
-                            echo $num_padded;
-                            ?>
-                            </td>
-                            <td>{{ $value->vendor}}</td>
-                            <td>{{ $value->firstname}}</td>
-                            <td>{{ $value->lastname}}</td>
-                            <td>{{ $value->address}}</td>
-                            <td>{{ $value->email}}</td>
-                            <td>{{ $value->weburl}}</td>
-                            {{-- <td>{{ $value->contract}}</td>
-                            <td>{{ $value->category}}</td>
-                            <td>{{ $value->department}}</td> --}}
-                            <td>{{ $value->effectivedate}}</td>
-                            <td>{{ $value->expirationdate}}</td>
-                            <td>{{ $value->user['name']}}</td>
-                            {{-- <td><a href="vendor/{{$value->vendor_id}}/files">View</a></td> --}}
-
-                            {{-- <td>
-                                <a href="vendor/{{$value->vendor_id}}">
-                                <p data-placement="top" data-toggle="tooltip" title="Edit">
-                                    <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="" >
-                                        <span class="glyphicon glyphicon-pencil"></span>
-                                    </button>
-                                </p>
-                                </a>
-                            </td> --}}
-                            {{-- <td>
-                                <a href="{{action('VendorsController@destroy', $vendor['vendor_id'])}}">
-                                    <p data-placement="top" data-toggle="tooltip" title="Delete">
-                                        <button class="btn btn-danger btn-xs delete" data-title="Delete" data-toggle="modal" data-target="#delete" data-id="{{ $value->vendor_id }}"><span class="glyphicon glyphicon-trash"></span></button>
+                              
+                                <td>{{ $value->name}}</td>
+                                <td>{{ $value->first_name}}</td>
+                                <td>{{ $value->last_name}}</td>
+                                <td>{{ $value->address}}</td>
+                                <td>{{ $value->email}}</td>
+                                <td>{{ $value->web_url}}</td>
+                                {{-- <td>{{ $value->contract}}</td>
+                                <td>{{ $value->category}}</td>
+                                <td>{{ $value->department}}</td> --}}
+                                <td>{{ $value->effectivedate}}</td>
+                                <td>{{ $value->expirationdate}}</td>
+                                <td>{{ $value->user['name']}}</td>
+                                @if(!Auth::guest())
+                                <td>
+                                    
+                                    <a href="vendor/{{$value->id}}">
+                                    <p data-placement="top" data-toggle="tooltip" title="Edit">
+                                        <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="" >
+                                            <span class="glyphicon glyphicon-eye-open"></span>
+                                        </button>
                                     </p>
-                                </a>
-                            </td> --}}
-                        </tr>
-                        @endforeach 
-                        </tbody>
-                    </table>
-                    
-                    {{-- {{$categories->appends(['s'=>$s])->links()}} --}}
-                    <div class="clearfix" ></div>
-                        {{-- Pagination --}}
-                        {{-- <ul class="pagination pull-right">
-                            <li class="disabled"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
-                        </ul>   --}}
-                        {{ $vendors->links() }}
+                                    </a>
+                                </td>
+                                @endif
+                                {{-- <td><a href="vendor/{{$value->vendor_id}}/files">View</a></td> --}}
+    
+                                {{-- <td>
+                                    <a href="vendor/{{$value->vendor_id}}">
+                                    <p data-placement="top" data-toggle="tooltip" title="Edit">
+                                        <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="" >
+                                            <span class="glyphicon glyphicon-pencil"></span>
+                                        </button>
+                                    </p>
+                                    </a>
+                                </td> --}}
+                                {{-- <td>
+                                    <a href="{{action('VendorsController@destroy', $vendor['vendor_id'])}}">
+                                        <p data-placement="top" data-toggle="tooltip" title="Delete">
+                                            <button class="btn btn-danger btn-xs delete" data-title="Delete" data-toggle="modal" data-target="#delete" data-id="{{ $value->vendor_id }}"><span class="glyphicon glyphicon-trash"></span></button>
+                                        </p>
+                                    </a>
+                                </td> --}}
+                            </tr>
+                            @endforeach 
+                            </tbody>
+                        </table>
+                        
+                        {{-- {{$categories->appends(['s'=>$s])->links()}} --}}
+                        <div class="clearfix" ></div>
+                            {{-- Pagination --}}
+                            {{-- <ul class="pagination pull-right">
+                                <li class="disabled"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+                            </ul>   --}}
+                            {{ $vendors->links() }}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
         {{-- modal area for edit --}}
         <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">

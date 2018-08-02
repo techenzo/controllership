@@ -16,6 +16,16 @@ use DB;
 
 class VendorsController extends Controller
 {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth',['except' =>['index', 'show']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -46,7 +56,20 @@ class VendorsController extends Controller
      */
     public function create()
     {
-        //
+        
+        $title = 'Controllership Contract Repository';
+        $contract = DB::select('SELECT * FROM contracts WHERE type ="Contract"  ORDER BY value');
+        $category = DB::select('SELECT value FROM contracts WHERE type ="Category"  ORDER BY value');
+        $department = DB::select('SELECT value FROM contracts WHERE type ="Department"  ORDER BY value');
+        
+
+        $termination = Terms::where('id', '1')->get();
+        $payment = Terms::where('id', '2')->get();
+        $spend = Terms::where('id', '3')->get();
+        $penalty = Terms::where('id', '4')->get();
+        
+        // return $all;
+        return view('vendor.create', compact('penalty','spend','payment','termination','contract', 'category', 'department', 'title'));
     }
 
     /**
@@ -56,90 +79,66 @@ class VendorsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    
     {
 
-    
-        // Validation
         $this->validate($request, [
-            'name' => 'required',
-            'first_name' => 'required',  
-            'last_name' => 'required',
-            'address' => 'required',
-            'email' => 'required',
-            'weburl' => 'required',
-            'contract' =>'required',
-            'category' =>'required',
-         
-    
-            'termination' =>'required',
-            'payment' =>'required',
-            'spend' =>'required',
-            'penalty' =>'required',
-
-            'effectdate' =>'required',
-            'expiredate' =>'required'
-
-            
-
+            'contract_type' =>'required', 
         ]);
 
+        $code = Contract::select('code')->where('value', $request->input('contract_type'))->first();
+        $request['code'] = $code->code;                  
+        $request['status_id'] = 1;
+        $request['user_id'] = auth()->user()->id;
 
+        // return $request->all();
 
-       
         
-        // Create New Vendor
-        $vendorName = $request->input('name');
-        $fName = $request->input('first_name');
-        $lName = $request->input('last_name');
-        $add = $request->input('address');
-        $mail= $request->input('email');
-        $web = $request->input('weburl');
-
-        $con = $request->input('contract');
+        $vendor = Vendor::create($request->except('_token', 'photos'));
 
 
-        $cat = $request->input('category');
-        // $dep = $request->input('department');
+        // Validation
+        // $this->validate($request, [
+        //     'name' => 'required',
+        //     'first_name' => 'required',  
+        //     'last_name' => 'required',
+        //     'address' => 'required',
+        //     'email' => 'required',
+        //     'web_url' => 'required',
+        //     'contract' =>'required',
+        //     'category' =>'required',
+        //     'termination' =>'required',
+        //     'payment' =>'required',
+        //     'spend' =>'required',
+        //     'penalty' =>'required',
+        //     'effectdate' =>'required',
+        //     'expiredate' =>'required'
+        // ]);
 
-        $t= $request->input('termination');
-        $p = $request->input('payment');
-        $s = $request->input('spend');
-        $p2 = $request->input('penalty');
-
-
-        $eff = $request->input('effectdate');
-        $exp= $request->input('expiredate');
-      
         //Search code
-
-        $code = Contract::select('code')->where('value', $con)->first();
-      
-        
-
-        $vendor = new Vendor;
-        $vendor->vendor = $vendorName;
-        $vendor->firstname = $fName;
-        $vendor->lastname = $lName;
-        $vendor->address = $add;
-        $vendor->email = $mail;
-        $vendor->weburl = $web;
-        $vendor->contract = $con;
-        $vendor->category = $cat;
-        $vendor->department = $request->input('department');
+        // $code = Contract::select('code')->where('value', $con)->first();
+        // $vendor = new Vendor;
+        // $vendor->name = $vendorName;
+        // $vendor->first_name = $fName;
+        // $vendor->last_name = $lName;
+        // $vendor->address = $add;
+        // $vendor->email = $mail;
+        // $vendor->web_url = $web;
+        // $vendor->contract_type = $con;
+        // $vendor->category_type = $cat;
+        // $vendor->department = $request->input('department');
 
 
-        $vendor->termination = $t;
-        $vendor->payment = $p;
-        $vendor->spend = $s;
-        $vendor->penalty = $p2;
+        // $vendor->termination = $t;
+        // $vendor->payment = $p;
+        // $vendor->spend = $s;
+        // $vendor->penalty = $p2;
 
-        $vendor->effectivedate = $eff;
-        $vendor->expirationdate = $exp;
-        $vendor->code = $code->code;
-        $vendor->user_id = auth()->user()->id;
-        $vendor->status = '1';
-        $vendor->save();
+        // $vendor->effectivedate = $eff;
+        // $vendor->expirationdate = $exp;
+        // $vendor->code = $code->code;
+        // $vendor->user_id = auth()->user()->id;
+        // $vendor->status_id = '1';
+        // $vendor->save();
 
 
 
@@ -191,18 +190,25 @@ class VendorsController extends Controller
     public function show($id)
     {
         // baguhin mo to mamaya.
-        $vendor = Vendor::whereVendorId($id)->first();
+        // $vendor = Vendor::whereVendorId($id)->first();
+        $vendor = Vendor::find($id);
         //Get vendor name
-        $vendorname = Vendor::select('vendor')->where('vendor_id', $id)->first();
+        $vendorname = Vendor::select('name')->where('id', $id)->first();
         $name =  $vendor->vendor;
+        
+
         //Get item id
-        $id = Item::select('id')->where('name', $name)->get();
+        $id = Item::select('id')->where('name', $vendor->name)->get();
         //Get file name
-        $files = Itemdetails::select('filename')->wherein('item_id', $id)->pluck('filename');
+         $files = Itemdetails::select('id', 'filename')
+                                    ->wherein('item_id', $id)
+                                    ->where('status_id', 1)
+                                    // ->get();
+                                    ->pluck('filename', 'filename');
        
       
  
-        return view('vendor.edit', compact('vendor', 'files'));
+        return view('vendor.show', compact('vendor', 'files'));
     }
 
     public function showfiles($id)
@@ -223,14 +229,30 @@ class VendorsController extends Controller
      */
     public function edit($id)
     {
-        $vendorid = Vendor::find($id);
+        $vendor = Vendor::find($id);
 
-        // if(auth()->user()->id !==$vendor->user_id){
-        //     return redirect('/posts')->with('error', 'Unauthorized Page');
-        // }
-        return view('pages.purchasing', compact('vendorid'));
+        //Get item id
+        $id = Item::select('id')->where('name', $vendor->name)->get();
+        //Get file name
+        $files = Itemdetails::select('id', 'filename')
+                                    ->wherein('item_id', $id)
+                                    ->where('status_id', 1)
+                                    // ->pluck('filename', 'id');
+                                    ->get();
 
+                            
+                                 
+                                    
+    
         
+
+
+
+
+                                   
+                               
+
+        return view('vendor.edit', compact('vendor', 'files', 'id', 'geti'));
     }
 
     /**
@@ -243,19 +265,15 @@ class VendorsController extends Controller
     public function update(Request $request, $id)
     {
         
-        
-
-        
-        
         $vendor = Vendor::find($id);
-        $vendor->vendor = $request->input('name');
-        $vendor->firstname = $request->input('first_name');
-        $vendor->lastname = $request->input('last_name');
+        $vendor->name = $request->input('name');
+        $vendor->first_name = $request->input('first_name');
+        $vendor->last_name = $request->input('last_name');
         $vendor->address = $request->input('address');
         $vendor->email = $request->input('email');
-        $vendor->weburl = $request->input('weburl');
-        $vendor->contract = $request->input('contract');
-        $vendor->category = $request->input('category');
+        $vendor->web_url = $request->input('weburl');
+        $vendor->contract_type = $request->input('contract');
+        $vendor->category_type = $request->input('category');
         $vendor->department = $request->input('department');
 
 
@@ -268,8 +286,44 @@ class VendorsController extends Controller
         $vendor->expirationdate = $request->input('expiredate');
        
         $vendor->user_id = auth()->user()->id;
-        $vendor->status = '1';
+        $vendor->status_id = '1';
         $vendor->save();
+
+
+
+        $this->validate($request, [
+            'name' => 'required',  
+            // 'photos'=>'required',
+            ]);
+     
+            if($request->hasFile('photos')){     
+                $allowedfileExtension=['pdf','jpg','png','docx','xlsx', 'csv'];    
+                $files = $request->file('photos');     
+                foreach($files as $file){     
+                $filename = $file->getClientOriginalName();     
+                $extension = $file->getClientOriginalExtension();     
+                $check=in_array($extension,$allowedfileExtension);
+            
+                // dd($check);
+        
+                if($check) {  
+                    $items= Item::create($request->all());   
+                        foreach ($request->photos as $photo) {  
+                            $filename = $photo->store('public');  
+                            ItemDetails::create([   
+                                'item_id' => $items->id,  
+                                'filename' => $filename
+                            ]);
+                        }
+                        // echo "Upload Successfully";
+                        }
+                        else{
+                            echo '<div class="alert alert-warning"><strong>Warning!</strong> Sorry Only Upload png , jpg , doc, pdf, xlsx</div>';
+                        }
+                }
+            
+
+            }
         
         return redirect('/home')->with('success', 'Vendor Updated');
     }
@@ -280,41 +334,21 @@ class VendorsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+
+    
     public function destroy($id)
     {
-        // $vendor = Vendor::find($id);
-        // return redirect('/purchasing',compact('vendor','id'));
+        $vendor = Vendor::find($id);
+        $vendor->status_id = '0';
+        $vendor->save();
+        return redirect('/home')->with('success', 'Vendor Deleted');
         
     }
 
     public function selectid($id){
         $vendor = Vendor::find($id);
         // return view('/',compact('passport','id'));
-        
-    }
-    public function addvendor(){
-        // $contract = new Vendor;
-        // $contract->title = 'Controllership Contract Repository';
-        // $contract->type = DB::select('SELECT type FROM tbl_contract_info WHERE contract_id = 1');
-
-       
-        $title = 'Controllership Contract Repository';
-        $contract = DB::select('SELECT * FROM tbl_contract WHERE type ="Contract"  ORDER BY value');
-        $category = DB::select('SELECT value FROM tbl_contract WHERE type ="Category"  ORDER BY value');
-        $department = DB::select('SELECT value FROM tbl_contract WHERE type ="Department"  ORDER BY value');
-
-        
-
-        $termination = Terms::where('id', '1')->get();
-        $payment = Terms::where('id', '2')->get();
-        $spend = Terms::where('id', '3')->get();
-        $penalty = Terms::where('id', '4')->get();
-        
-
-        
-        
-        // return $all;
-        return view('vendor.create', compact('penalty','spend','payment','termination','contract', 'category', 'department', 'title'));
         
     }
 

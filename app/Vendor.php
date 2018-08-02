@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Vendor extends Model
 {
+    protected $guarded = [];
+
     ///Table Name
 
-    protected $table = 'tbl_vendors_info';
-
+    public $table = 'vendors';
     //Primary Key
     public $primaryKey = 'id';
-
 
     //Timestamps
     public $timestamps = true;
@@ -30,8 +30,6 @@ class Vendor extends Model
             ->orWhere('vendor', 'like', '%' .$s. '%');
     }
 
-    //for export files
-    public $fillable = ['vendor','firstname'];
+    //for export files only two data
+    // public $fillable = ['vendor','firstname'];
 }
-
-

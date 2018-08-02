@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddUseridToVendor extends Migration
+class CreateContractsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class AddUseridToVendor extends Migration
      */
     public function up()
     {
-        Schema::table('tbl_vendors_info', function($table){
-            $table->integer('user_id');
-            });
+        Schema::create('contracts', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('type');
+            $table->string('value');
+            $table->string('code');
+        });
     }
 
     /**
@@ -25,8 +28,6 @@ class AddUseridToVendor extends Migration
      */
     public function down()
     {
-        Schema::table('tbl_vendors_info', function($table){
-            $table->dropColumn('user_id');
-            });
+        Schema::dropIfExists('contracts');
     }
 }
