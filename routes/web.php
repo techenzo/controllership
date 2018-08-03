@@ -68,3 +68,5 @@ Route::get('vendors/{id}/profile', 'UserController@profile');
 Route::resource('crrs', 'CrrsController');
 
 Route::get('generate-pdf', 'PdfviewController@pdfview')->name('generate-pdf');
+
+Route::get('vendors', 'VendorsController@getVendorAutocomplete');

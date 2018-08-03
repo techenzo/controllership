@@ -37,6 +37,7 @@
     <script>
 
     </script>
+    @yield ("scripts")
 
 </body>
 </html>

@@ -20,8 +20,15 @@
 
 
                                 {!! Form::open(['url' => 'purchasing', 'method' => 'get'])!!}
-                                    {{ Form::select('vendors', $vendor_lists, null, ['class' => 'btn btn-default dropdown-toggle', 'placeholder' => 'Choose a vendor...']) }}
+                                    {{-- <div class="form-group">
+                                    {{ Form::select('vendors', $vendor_lists, null, ['class' => 'btn btn-default', 'placeholder' => 'Filter by vendor...']) }} &nbsp;
+                                    </div> --}}
+                                    <div class="form-group">
+                                    {{Form::label('vendor-number', 'Vendor Number')}}
+                                    {{ Form::text('vendor_number', '', ['class' => 'btn btn-default', 'placeholder' => 'Filter by vendor...', 'id' => 'vendor_number'])}}
+                                    {{Form::label('', '', ['type' => 'hidden', 'id' => 'project-id'])}}
                                     {{ Form::button('<i class="glyphicon glyphicon-search"></i>', array('type' => 'submit', 'class' => 'btn btn-default'))}}
+                                    </di>
                                 {!! Form::close() !!}
                             {{-- <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                                 <span id="search_concept">Filter by Vendorname</span> <span class="caret"></span>
@@ -223,4 +230,8 @@
                 <!-- /.modal-dialog --> 
                 
     </div>
+@endsection
+
+@section ("scripts")
+<script src="{{ URL::asset('js/search.js') }}"></script>
 @endsection
