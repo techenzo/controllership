@@ -25,7 +25,7 @@
                                     </div> --}}
                                     <div class="form-group">
                                     {{Form::label('vendor-number', 'Vendor Number')}}
-                                    {{ Form::text('vendor_number', '', ['class' => 'btn btn-default', 'placeholder' => 'Filter by vendor...', 'id' => 'vendor_number'])}}
+                                    {{ Form::text('vendor_number', '', ['class' => 'btn btn-default', 'placeholder' => 'Search Vendor Name', 'id' => 'vendor_number'])}}
                                     {{Form::label('', '', ['type' => 'hidden', 'id' => 'project-id'])}}
                                     {{ Form::button('<i class="glyphicon glyphicon-search"></i>', array('type' => 'submit', 'class' => 'btn btn-default'))}}
                                     </di>
