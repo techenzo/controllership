@@ -104,20 +104,29 @@
                         </div>
                         
                         {{-- files can be view --}}
-                        <ul>    
-                                @foreach ($files as $filename)     
-                                <li class="{{$filename->id}}">
+                        <div class="row">
+                                <fieldset class="for-panel">
+                                        <legend>Uploaded Files</legend>
+                                        {{-- files can be show --}}
+                                        <ul>    
+                                                @foreach ($files as $filename)     
+                                                <li class="{{$filename->id}}">
+                
+                                                                <a href="{!! route('file', ['id'=>$filename->id]) !!}"        
+                                                                <span id = "" title = "Delete" class="btn btn-danger btn-xs glyphicon glyphicon-trash"></span>
+                                                                </a>     
+                                                                </span>&nbsp;
+                                                                <a href="/storage/{!! urldecode(str_replace('public/', '', $filename->filename)) !!}">
+                                                                <?=str_replace('public/', ' ', $filename->filename)?>
+                                                                </a>
+                                                </li>
+                                                @endforeach  
+                                        </ul>
+                                </fieldset>
+                        </div>
+                        
+                        
 
-                                                <a href="{!! route('file', ['id'=>$filename->id]) !!}"        
-                                                <span id = "" title = "Delete" class="btn btn-danger btn-xs glyphicon glyphicon-trash"></span>
-                                                </a>     
-                                                </span>&nbsp;
-                                                <a href="/storage/{!! urldecode(str_replace('public/', '', $filename->filename)) !!}">
-                                                <?=str_replace('public/', ' ', $filename->filename)?>
-                                                </a>
-                                </li>
-                                @endforeach  
-                        </ul>
 
                         {{-- <center>
                         <span class="btn btn-default btn-file">                                                          

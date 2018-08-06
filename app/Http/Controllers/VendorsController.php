@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\User;
@@ -238,20 +239,7 @@ class VendorsController extends Controller
         $files = Itemdetails::select('id', 'filename')
                                     ->wherein('item_id', $id)
                                     ->where('status_id', 1)
-                                    // ->pluck('filename', 'id');
                                     ->get();
-
-                            
-                                 
-                                    
-    
-        
-
-
-
-
-                                   
-                               
 
         return view('vendor.edit', compact('vendor', 'files', 'id', 'geti'));
     }
