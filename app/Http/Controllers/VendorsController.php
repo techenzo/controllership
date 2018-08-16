@@ -147,7 +147,7 @@ class VendorsController extends Controller
 
         $this->validate($request, [
             'name' => 'required',  
-            'photos'=>'required',
+            // 'photos'=>'required',
             ]);
      
             if($request->hasFile('photos')){     

@@ -1,6 +1,6 @@
 $(document).ready(function() {
   
-    var vendorNumber = $('#vendor_number').val();
+    var vendorNumber = $('#vendor_name').val();
        axios.get('http://127.0.0.1:8000/vendors', {
            vendor_number: vendorNumber
        })
@@ -8,16 +8,16 @@ $(document).ready(function() {
            var optionsVendor = response.data.vendor;  
          console.log(optionsVendor);
     
-         $( "#vendor_number" ).autocomplete({
+         $( "#vendor_name" ).autocomplete({
         //    minLength: 2,
            source: optionsVendor,
            focus: function( event, ui ) {
-             $( "#vendor_number" ).val( ui.item.value );
+             $( "#vendor_name" ).val( ui.item.value );
             
              return false;
            },
            select: function( event, ui ) {
-             $( "#vendor_number" ).val( ui.item.value );
+             $( "#vendor_name" ).val( ui.item.value );
             //  $( "#project-desc" ).val( ui.item.desc );
             //  $( "#vendor_name" ).val( ui.item.desc );
      

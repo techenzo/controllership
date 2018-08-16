@@ -128,15 +128,15 @@
                         
 
 
-                        {{-- <center>
+                        <center>
                         <span class="btn btn-default btn-file">                                                          
                                 <input type="file" name="photos[]" id="js-upload-files" multiple>
-                        </span> --}}
+                        </span>
 
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                         Add File
-                        </button>
+                        </button> --}}
               
                         <!-- Modal -->
                         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

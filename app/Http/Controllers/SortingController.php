@@ -29,10 +29,10 @@ class SortingController extends Controller
         //                                             ->paginate(10)      
         //             : $vendor->where('status_id', 1)->orderBy('expirationdate', 'ASC')->paginate(10);  
 
-        $inputLastName= Input::get('vendor_number');
+        $vendorName= Input::get('vendor_name');
 
-        $vendors = $inputLastName
-                    ? $vendor->where('id', $inputLastName)->where('status_id', 1)
+        $vendors = $vendorName
+                    ? $vendor->where('name', 'like',  '%'.$vendorName.'%')->where('status_id', 1)
                                                     ->orderBy('expirationdate', 'ASC')
                                                     ->paginate(10)      
                     : $vendor->where('status_id', 1)->orderBy('expirationdate', 'ASC')->paginate(10);
