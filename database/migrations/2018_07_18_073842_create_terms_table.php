@@ -18,6 +18,7 @@ class CreateTermsTable extends Migration
             $table->string('title');
             $table->string('type');
             $table->longText('terms');
+            $table->timestamps();
         });
     }
 

@@ -17,7 +17,8 @@ class CreateContractsTable extends Migration
             $table->increments('id');
             $table->string('type');
             $table->string('value');
-            $table->string('code');
+            $table->string('code')->nullable();
+            $table->timestamps();
         });
     }
 
