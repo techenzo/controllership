@@ -17,6 +17,8 @@ class CreateAccessesTable extends Migration
             $table->increments('id');
             $table->string('ntid');
             $table->unsignedInteger('access');
+            $table->timestamps();
+
         });
     }
 

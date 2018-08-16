@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\User;
@@ -10,6 +11,7 @@ use App\Terms;
 use App\Contract;
 use App\Item;
 use App\ItemDetails;
+use Illuminate\Support\Facades\Input;
 
 
 use DB;
@@ -145,7 +147,7 @@ class VendorsController extends Controller
 
         $this->validate($request, [
             'name' => 'required',  
-            'photos'=>'required',
+            // 'photos'=>'required',
             ]);
      
             if($request->hasFile('photos')){     
@@ -237,20 +239,7 @@ class VendorsController extends Controller
         $files = Itemdetails::select('id', 'filename')
                                     ->wherein('item_id', $id)
                                     ->where('status_id', 1)
-                                    // ->pluck('filename', 'id');
                                     ->get();
-
-                            
-                                 
-                                    
-    
-        
-
-
-
-
-                                   
-                               
 
         return view('vendor.edit', compact('vendor', 'files', 'id', 'geti'));
     }
@@ -394,6 +383,23 @@ class VendorsController extends Controller
         // return view('vendor.create')->with('sucess', 'Successfuly Uploaded');
             
     }   
+
+    public function getVendorAutocomplete () {
+       
+        // $request->input('vendor_number');
+        $inputVendor = Input::get('vendor_number');
+        // $inputVendor = '203445';
+        $vendors = Vendor::where('id', 'LIKE', '%'.$inputVendor.'%')->get();
+        // $vendors = Vendor::get();
+        $arrJSON = array();
+        foreach($vendors as $vendor) {
+            // array_push($arrJSON, $vendor->vendor_number." [".$vendor->vendor_name."]");
+            array_push($arrJSON, array('value' => $vendor->id, 'label' => $vendor->name, 'desc' => $vendor->last_name));
+        }
+        return response()->json(["vendor" => $arrJSON]);
+        // return $arrJSON;
+        
+    }
 }
     
     
